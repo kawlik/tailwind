@@ -10,7 +10,7 @@ export default function (props: {
 	return (
 		<input
 			className="bg-gray-400 bg-opacity-20 px-4 py-2 rounded-md"
-			onChange={props.onChange}
+			onChange={props?.onChange || (() => {})}
 			placeholder={props.placeholder}
 			type={props.type}
 			value={props.value}
