@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+	width: 100vw;
+	height: 100vh;
+
+	overflow-x: hidden;
+	overflow-y: hidden;
+
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+
+	justify-content: space-between;
+	align-content: stretch;
+	align-items: stretch;
+}
