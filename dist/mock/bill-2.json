@@ -1,0 +1,139 @@
+{
+    "id": "2",
+    "bills": [
+        {
+            "date": "18.08.2022",
+            "id": "1",
+            "price": 12,
+            "title": "Some expense 1",
+            "type": "Type 1",
+            "user": "User 1"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "2",
+            "price": 23,
+            "title": "Some expense 2",
+            "type": "Type 2",
+            "user": "User 2"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "3",
+            "price": 31,
+            "title": "Some expense 3",
+            "type": "Type 3",
+            "user": "User 3"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "4",
+            "price": 32,
+            "title": "Some expense 4",
+            "type": "Type 1",
+            "user": "User 2"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "5",
+            "price": 12,
+            "title": "Some expense 5",
+            "type": "Type 1",
+            "user": "User 1"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "6",
+            "price": 23,
+            "title": "Some expense 6",
+            "type": "Type 2",
+            "user": "User 2"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "7",
+            "price": 31,
+            "title": "Some expense 7",
+            "type": "Type 3",
+            "user": "User 3"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "8",
+            "price": 32,
+            "title": "Some expense 8",
+            "type": "Type 1",
+            "user": "User 2"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "9",
+            "price": 12,
+            "title": "Some expense 9",
+            "type": "Type 1",
+            "user": "User 1"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "10",
+            "price": 23,
+            "title": "Some expense 10",
+            "type": "Type 2",
+            "user": "User 2"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "11",
+            "price": 31,
+            "title": "Some expense 11",
+            "type": "Type 3",
+            "user": "User 3"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "12",
+            "price": 32,
+            "title": "Some expense 12",
+            "type": "Type 1",
+            "user": "User 2"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "13",
+            "price": 12,
+            "title": "Some expense 13",
+            "type": "Type 1",
+            "user": "User 1"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "14",
+            "price": 23,
+            "title": "Some expense 14",
+            "type": "Type 2",
+            "user": "User 2"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "15",
+            "price": 31,
+            "title": "Some expense 15",
+            "type": "Type 3",
+            "user": "User 3"
+        },
+        {
+            "date": "18.08.2022",
+            "id": "16",
+            "price": 32,
+            "title": "Some expense 16",
+            "type": "Type 1",
+            "user": "User 2"
+        }
+    ],
+    "participants": [
+        "User 1",
+        "User 2",
+        "User 3"
+    ],
+    "title": "Bill 2 custom title"
+}

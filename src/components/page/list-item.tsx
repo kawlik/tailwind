@@ -12,13 +12,13 @@ export default function (props: {
 
 	// component layout
 	return (
-		<li className="flex flex-nowrap gap-2 items-center">
+		<button className="flex flex-nowrap gap-2 items-center">
 			<AvatarIcon icon={FaStar} />
 			<div className="flex-1 overflow-hidden">
 				<p className="font-bold w-max">{props.title}</p>
 				<p className="text-sm w-max">{props.participants.join(', ')}</p>
 			</div>
 			<span className="font-light italic text-xs w-max">{props.timestamp}</span>
-		</li>
+		</button>
 	);
 }

@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "participants": [
+            "User 1", "User 2", "User 3"
+        ],
+		"timestamp": "17.08.2022",
+		"title": "Bill title 1"
+    },
+    {
+        "id": "2",
+        "participants": [
+            "User 1", "User 2", "User 3"
+        ],
+		"timestamp": "17.08.2022",
+		"title": "Bill title 2"
+    },
+    {
+        "id": "3",
+        "participants": [
+            "User 1", "User 2", "User 3"
+        ],
+		"timestamp": "17.08.2022",
+		"title": "Bill title 3"
+    }
+]
