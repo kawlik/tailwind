@@ -1,5 +1,7 @@
+import { FormEvent } from 'react';
+
 export default function (props: {
-	onChange?(): void;
+	onChange?(event: FormEvent<HTMLInputElement>): void;
 	placeholder: string;
 	type: string;
 	value: string;

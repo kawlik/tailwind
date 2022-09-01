@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAtuhContext } from './contexts/@';
-import { ListPage, NewsPage, ProfilePage, ReportsPage } from './pages/@';
-import { HomeScreen, SignInScreen, SignUpScreen } from './screens/@';
+import { BillPage, ListPage, NewsPage, ProfilePage, ReportsPage } from './pages/@';
+import { BillScreen, HomeScreen, SignInScreen, SignUpScreen } from './screens/@';
 
 export default function () {
 	// component logic
@@ -21,6 +21,11 @@ export default function () {
 		<Routes>
 			{/* default fallback */}
 			<Route path="*" element={<Navigate to="list" />} />
+
+			{/* bill screen */}
+			<Route path="bill" element={<BillScreen />}>
+				<Route path=":billID" element={<BillPage />} />
+			</Route>
 
 			{/* home screen */}
 			<Route path="*" element={<HomeScreen />}>

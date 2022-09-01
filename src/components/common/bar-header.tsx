@@ -16,7 +16,7 @@ export default function (props: {
 	return (
 		<header className="flex flex-nowrap items-center justify-between px-3 py-4 z-30">
 			<Collapse collapse={!!props?.skipL}>
-				<BtnIcon icon={props.iconL} onClick={props.actionR} />
+				<BtnIcon icon={props.iconL} onClick={props.actionL} />
 			</Collapse>
 			<h4 className="capitalize font-semibold text-lg">{props.label}</h4>
 			<Collapse collapse={!!props?.skipR}>

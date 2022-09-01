@@ -1,26 +1,38 @@
-import { collection, DocumentData, onSnapshot, query, QuerySnapshot, where } from 'firebase/firestore';
+import {
+	collection,
+	DocumentData,
+	onSnapshot,
+	query,
+	QuerySnapshot,
+	where,
+} from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
-import { ListItemType } from '../types/@';
-import { FirebaseService } from './@';
+import { ListType } from '../types/@';
+import { FirebaseService, FirestoreService } from './@';
 
 // define service
 class Service {
-	private readonly collection = collection(FirebaseService.Firestore, 'list');
+	constructor(readonly data$ = new BehaviorSubject<ListType[]>([])) {}
 
-	constructor(readonly list$ = new BehaviorSubject<ListItemType[]>([])) {
-		onSnapshot(query(this.collection, where('participants', 'array-contains', 'User 1')), (snapshot) => {
-			const list = this.parse(snapshot);
-
-			this.list$.next(list);
-		});
+	unregister(document: string) {
+		return onSnapshot(query(this.register(document)), this.callback);
 	}
 
-	private parse(snapshot: QuerySnapshot<DocumentData>): ListItemType[] {
-		return snapshot.docs.map((doc) => ({
-			...doc.data(),
-			id: doc.id,
-		})) as ListItemType[];
-	}
+	private register = (document: string) => {
+		return query(
+			collection(FirebaseService.Firestore, FirestoreService.List),
+			where('participants', 'array-contains', document),
+		);
+	};
+
+	private callback = (snapshot: QuerySnapshot<DocumentData>) => {
+		this.data$.next(
+			snapshot.docs.map((doc) => ({
+				...doc.data(),
+				id: doc.id,
+			})) as ListType[],
+		);
+	};
 }
 
 // export service

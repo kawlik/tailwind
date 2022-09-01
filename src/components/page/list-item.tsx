@@ -12,7 +12,7 @@ export default function (props: {
 
 	// component layout
 	return (
-		<button className="flex flex-nowrap gap-2 items-center">
+		<button className="flex flex-nowrap gap-2 items-center" onClick={props.action}>
 			<AvatarIcon icon={FaStar} />
 			<div className="flex-1 overflow-hidden">
 				<p className="font-bold w-max">{props.title}</p>

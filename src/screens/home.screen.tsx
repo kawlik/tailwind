@@ -14,12 +14,13 @@ export default function () {
 	// component logic
 	const location = useLocation();
 	const navigate = useNavigate();
+	const pathname = useParams();
 
 	// dataset
-	const activePage = location.pathname.split('/')[1] || '';
+	const activePage = pathname['*'] || '';
 
 	// actions
-	const addNewList = () => {};
+	const goCreateNewList = () => {};
 
 	// component layout
 	return (
@@ -33,7 +34,7 @@ export default function () {
 			/>
 			<Outlet />
 			<BarFooter
-				actionAdd={addNewList}
+				actionAdd={goCreateNewList}
 				icons={[FaWallet, FaBell, FaPaperclip, FaUser]}
 				pages={['list', 'news', 'reports', 'profile']}
 			/>

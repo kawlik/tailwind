@@ -1,18 +1,30 @@
 import { useEffect, useState } from 'react';
 import { FaLightbulb } from 'react-icons/fa';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ListItem } from '../components/page/@';
 import { BgIcon, Input } from '../components/util/@';
 import { ListService } from '../services/@';
-import { ListItemType } from '../types/@';
+import { ListType } from '../types/@';
 
 export default function () {
 	// component logic
-	const [list, setList] = useState<ListItemType[]>([]);
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	// create state
+	const [list, setList] = useState<ListType[]>([]);
 
 	// update state
 	useEffect(() => {
-		ListService.list$.subscribe((list) => setList(list));
+		const unregister = ListService.unregister('User 1');
+
+		ListService.data$.subscribe((list) => setList(list));
+
+		return unregister;
 	}, []);
+
+	// actions
+	const openBill = (billID: string) => () => navigate(`/bill/${billID}`);
 
 	// component layout
 	return (
@@ -20,7 +32,7 @@ export default function () {
 			<Input placeholder="Search" type="text" value="" />
 			{list.map((item) => (
 				<ListItem
-					action={() => {}}
+					action={openBill(item.id)}
 					id={item.id}
 					key={item.id}
 					participants={item.participants}
