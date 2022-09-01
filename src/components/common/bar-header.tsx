@@ -18,7 +18,7 @@ export default function (props: {
 			<Collapse collapse={!!props?.skipL}>
 				<BtnIcon icon={props.iconL} onClick={props.actionL} />
 			</Collapse>
-			<h4 className="capitalize font-semibold text-lg">{props.label}</h4>
+			<h4 className="capitalize font-semibold text-lg overflow-hidden">{props.label}</h4>
 			<Collapse collapse={!!props?.skipR}>
 				<BtnIcon icon={props.iconR} onClick={props.actionR} />
 			</Collapse>
