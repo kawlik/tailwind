@@ -1,14 +1,14 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { useAtuhContext } from './contexts/@';
+import { useAppContext } from './contexts/@';
 import { BillPage, ListPage, NewsPage, ProfilePage, ReportsPage } from './pages/@';
 import { BillScreen, HomeScreen, SignInScreen, SignUpScreen } from './screens/@';
 
 export default function () {
 	// component logic
-	const { user } = useAtuhContext();
+	const context = useAppContext();
 
 	// component layout
-	return !user ? (
+	return !context.user ? (
 		<Routes>
 			{/* default fallback */}
 			<Route path="*" element={<Navigate to="signin" />} />

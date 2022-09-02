@@ -1,3 +1,4 @@
+import { Unsubscribe } from 'firebase/auth';
 import {
 	collection,
 	DocumentData,
@@ -7,16 +8,26 @@ import {
 	where,
 } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
-import { ListType } from '../types/@';
+import { BillInfoType } from '../types/@';
 import { FirebaseService, FirestoreService } from './@';
 
 // define service
-class Service {
-	constructor(readonly data$ = new BehaviorSubject<ListType[]>([])) {}
+class ListService {
+	constructor(
+		private snapshot: Unsubscribe = () => {},
+		private subject$ = new BehaviorSubject<BillInfoType[]>([]),
+	) {}
 
-	unregister(document: string) {
-		return onSnapshot(query(this.register(document)), this.callback);
-	}
+	subscribeOn = (document: string) => {
+		this.unsubscribe();
+		this.snapshot = onSnapshot(this.register(document), this.callback);
+
+		return this.subject$;
+	};
+
+	unsubscribe = () => {
+		this.snapshot();
+	};
 
 	private register = (document: string) => {
 		return query(
@@ -26,14 +37,14 @@ class Service {
 	};
 
 	private callback = (snapshot: QuerySnapshot<DocumentData>) => {
-		this.data$.next(
-			snapshot.docs.map((doc) => ({
-				...doc.data(),
-				id: doc.id,
-			})) as ListType[],
-		);
+		const data = snapshot.docs.map((doc) => ({
+			...doc.data(),
+			id: doc.id,
+		}));
+
+		this.subject$.next(data as BillInfoType[]);
 	};
 }
 
 // export service
-export default new Service();
+export default new ListService();

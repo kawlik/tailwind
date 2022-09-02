@@ -1,2 +1,2 @@
-export { default as useAtuhContext } from './auth.context';
-export { default as AtuhProvider } from './auth.provider';
+export { default as useAppContext } from './app.context';
+export { default as AppProvider } from './app.provider';

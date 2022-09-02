@@ -1,5 +1,5 @@
 // define service
-class Service {
+class FirestoreService {
 	constructor(private bill = 'bill', private list = 'list') {}
 
 	get Bill() {
@@ -12,4 +12,4 @@ class Service {
 }
 
 // export service
-export default new Service();
+export default new FirestoreService();

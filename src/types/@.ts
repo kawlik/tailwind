@@ -1,3 +1,3 @@
-export type { default as BillType } from './bill';
-export type { default as ListType } from './list';
-export type { default as PostType } from './post';
+export type { default as BillDataType } from './bill-data';
+export type { default as BillInfoType } from './bill-info';
+export type { default as BIllPostType } from './bill-post';

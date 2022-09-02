@@ -1,26 +1,25 @@
 import { useEffect, useState } from 'react';
 import { FaLightbulb } from 'react-icons/fa';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ListItem } from '../components/page/@';
 import { BgIcon, Input } from '../components/util/@';
+import { useAppContext } from '../contexts/@';
 import { ListService } from '../services/@';
-import { ListType } from '../types/@';
+import { BillInfoType } from '../types/@';
 
 export default function () {
 	// component logic
-	const location = useLocation();
+    const context = useAppContext();
 	const navigate = useNavigate();
 
 	// create state
-	const [list, setList] = useState<ListType[]>([]);
+	const [list, setList] = useState<BillInfoType[]>([]);
 
 	// update state
 	useEffect(() => {
-		const unregister = ListService.unregister('User 1');
+		ListService.subscribeOn('User 1').subscribe((list) => setList(list));
 
-		ListService.data$.subscribe((list) => setList(list));
-
-		return unregister;
+		return ListService.unsubscribe;
 	}, []);
 
 	// actions

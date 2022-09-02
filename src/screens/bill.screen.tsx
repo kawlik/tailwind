@@ -1,12 +1,11 @@
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { BarHeader } from '../components/common/@';
 
 export default function () {
 	// component logic
-	const location = useLocation();
 	const navigate = useNavigate();
-    const pathname = useParams();
+	const pathname = useParams();
 
 	// dataset
 	const billTitle = pathname['billID'] || '';

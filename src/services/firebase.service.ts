@@ -4,7 +4,7 @@ import { AuthService } from './@';
 import { FirebaseConfig } from '../configs/@';
 
 // define service
-class Service {
+class FirebaseService {
 	constructor(
 		private auth = getAuth(FirebaseConfig),
 		private firestore = initializeFirestore(FirebaseConfig, {}),
@@ -23,4 +23,4 @@ class Service {
 }
 
 // export service
-export default new Service();
+export default new FirebaseService();

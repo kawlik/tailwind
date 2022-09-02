@@ -1,9 +1,9 @@
-import { signInAnonymously, User } from 'firebase/auth';
+import { GoogleAuthProvider, signInAnonymously, signInWithPopup, User } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
 import { FirebaseService } from './@';
 
 // define service
-class Service {
+class AuthService {
 	constructor(readonly user$ = new BehaviorSubject<User | null>(null)) {}
 
 	logout(): void {
@@ -13,7 +13,11 @@ class Service {
 	signInAnonymously(): void {
 		signInAnonymously(FirebaseService.Auth);
 	}
+
+	signInWithGoogle(): void {
+		signInWithPopup(FirebaseService.Auth, new GoogleAuthProvider());
+	}
 }
 
 // export service
-export default new Service();
+export default new AuthService();

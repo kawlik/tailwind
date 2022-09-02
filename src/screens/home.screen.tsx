@@ -6,14 +6,12 @@ import {
 	FaUser,
 	FaWallet,
 } from 'react-icons/fa';
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { BarFooter, BarHeader } from '../components/common/@';
 import { AuthService } from '../services/@';
 
 export default function () {
 	// component logic
-	const location = useLocation();
-	const navigate = useNavigate();
 	const pathname = useParams();
 
 	// dataset

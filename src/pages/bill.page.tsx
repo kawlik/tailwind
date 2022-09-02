@@ -1,25 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { BillInput, BillItem } from '../components/page/@';
 import { BillService } from '../services/@';
-import { BillType } from '../types/@';
+import { BillDataType } from '../types/@';
 
 export default function () {
 	// component logic
-	const location = useLocation();
-	const navigate = useNavigate();
 	const pathname = useParams();
 
 	// create state
-	const [bill, setBill] = useState<BillType | null>(null);
+	const [bill, setBill] = useState<BillDataType | null>(null);
 
 	// update state
 	useEffect(() => {
-		const unregister = BillService.unregister(pathname['billID']!);
+		BillService.subscribeOn(pathname['billID']!).subscribe((bill) => setBill(bill));
 
-		BillService.data$.subscribe((bill) => setBill(bill));
-
-		return unregister;
+		return BillService.unsubscribe;
 	}, []);
 
 	// component layout

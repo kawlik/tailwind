@@ -1,24 +1,35 @@
+import { Unsubscribe } from 'firebase/auth';
 import { doc, DocumentData, DocumentSnapshot, onSnapshot } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
-import { BillType } from '../types/@';
+import { BillDataType } from '../types/@';
 import { FirebaseService, FirestoreService } from './@';
 
 // define service
-class Service {
-	constructor(readonly data$ = new BehaviorSubject<BillType | null>(null)) {}
+class BillService {
+	constructor(
+		private snapshot: Unsubscribe = () => {},
+		private subject$ = new BehaviorSubject<BillDataType | null>(null),
+	) {}
 
-	unregister(document: string) {
-		return onSnapshot(this.register(document), this.callback);
-	}
+	subscribeOn = (document: string) => {
+		this.unsubscribe();
+		this.snapshot = onSnapshot(this.register(document), this.callback);
+
+		return this.subject$;
+	};
+
+	unsubscribe = () => {
+		this.snapshot();
+	};
 
 	private register = (document: string) => {
 		return doc(FirebaseService.Firestore, FirestoreService.Bill, document);
 	};
 
 	private callback = (snapshot: DocumentSnapshot<DocumentData>) => {
-		this.data$.next((snapshot.data() as BillType) || null);
+		this.subject$.next((snapshot.data() as BillDataType) || null);
 	};
 }
 
 // export service
-export default new Service();
+export default new BillService();

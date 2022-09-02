@@ -1,4 +1,4 @@
-import { FaLock, FaUserSecret } from 'react-icons/fa';
+import { FaGoogle, FaLock, FaUserSecret } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { BgIcon } from '../components/util/@';
 import { SignInBtn, SignInForm } from '../components/screen/@';
@@ -16,6 +16,11 @@ export default function () {
 				<SignInForm />
 				<h2 className="font-bold text-xl">or use third party</h2>
 				<div className="flex flex-1 flex-col gap-2">
+					<SignInBtn
+						icon={FaGoogle}
+						label="Sign in with Google"
+						onClick={AuthService.signInWithGoogle}
+					/>
 					<SignInBtn
 						icon={FaUserSecret}
 						label="Sign in anonymously"
