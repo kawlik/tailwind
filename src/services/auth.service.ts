@@ -4,7 +4,7 @@ import { FirebaseService } from './@';
 
 // define service
 class AuthService {
-	constructor(readonly user$ = new BehaviorSubject<User | null>(null)) {}
+	readonly user$ = new BehaviorSubject<User | null>(null);
 
 	logout(): void {
 		FirebaseService.Auth.signOut();

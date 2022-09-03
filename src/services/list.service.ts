@@ -1,50 +1,33 @@
-import { Unsubscribe } from 'firebase/auth';
-import {
-	collection,
-	DocumentData,
-	onSnapshot,
-	query,
-	QuerySnapshot,
-	where,
-} from 'firebase/firestore';
+import { collection, query, QuerySnapshot, where } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { BillInfoType } from '../types/@';
 import { FirebaseService, FirestoreService } from './@';
+import { FirestoreQuery } from './common/@';
 
 // define service
-class ListService {
-	constructor(
-		private snapshot: Unsubscribe = () => {},
-		private subject$ = new BehaviorSubject<BillInfoType[]>([]),
-	) {}
+class ListService<T> extends FirestoreQuery<T> {
+	readonly bill$ = new BehaviorSubject<BillInfoType | null>(null);
 
-	subscribeOn = (document: string) => {
-		this.unsubscribe();
-		this.snapshot = onSnapshot(this.register(document), this.callback);
+	constructor(feed: T) {
+		super(new BehaviorSubject<T>(feed));
+	}
 
-		return this.subject$;
-	};
-
-	unsubscribe = () => {
-		this.snapshot();
-	};
-
-	private register = (document: string) => {
+	override register = (document: string) => {
 		return query(
 			collection(FirebaseService.Firestore, FirestoreService.List),
 			where('participants', 'array-contains', document),
 		);
 	};
 
-	private callback = (snapshot: QuerySnapshot<DocumentData>) => {
-		const data = snapshot.docs.map((doc) => ({
+	override callback = (snapshot: QuerySnapshot) => {
+		const payload = snapshot.docs.map((doc) => ({
 			...doc.data(),
 			id: doc.id,
 		}));
 
-		this.subject$.next(data as BillInfoType[]);
+		this.subject$.next(payload as T);
 	};
 }
 
 // export service
-export default new ListService();
+export default new ListService<BillInfoType[]>([]);

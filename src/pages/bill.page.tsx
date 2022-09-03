@@ -15,7 +15,7 @@ export default function () {
 	useEffect(() => {
 		BillService.subscribeOn(pathname['billID']!).subscribe((bill) => setBill(bill));
 
-		return BillService.unsubscribe;
+		return () => BillService.unsubscribe();
 	}, []);
 
 	// component layout

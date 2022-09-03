@@ -3,13 +3,11 @@ import { FaLightbulb } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { ListItem } from '../components/page/@';
 import { BgIcon, Input } from '../components/util/@';
-import { useAppContext } from '../contexts/@';
 import { ListService } from '../services/@';
 import { BillInfoType } from '../types/@';
 
 export default function () {
 	// component logic
-    const context = useAppContext();
 	const navigate = useNavigate();
 
 	// create state
@@ -23,7 +21,10 @@ export default function () {
 	}, []);
 
 	// actions
-	const openBill = (billID: string) => () => navigate(`/bill/${billID}`);
+	const openBill = (bill: BillInfoType) => () => {
+		ListService.bill$.next(bill);
+		navigate(`/bill/${bill.id}`);
+	};
 
 	// component layout
 	return (
@@ -31,7 +32,7 @@ export default function () {
 			<Input placeholder="Search" type="text" value="" />
 			{list.map((item) => (
 				<ListItem
-					action={openBill(item.id)}
+					action={openBill(item)}
 					id={item.id}
 					key={item.id}
 					participants={item.participants}
