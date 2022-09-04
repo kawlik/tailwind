@@ -8,10 +8,7 @@ class FirebaseService {
 	constructor(
 		private auth = getAuth(FirebaseConfig),
 		private firestore = initializeFirestore(FirebaseConfig, {}),
-	) {
-		// register events
-		onAuthStateChanged(auth, (user) => AuthService.user$.next(user));
-	}
+	) {}
 
 	get Auth() {
 		return this.auth;

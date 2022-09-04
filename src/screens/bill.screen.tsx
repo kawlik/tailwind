@@ -1,16 +1,16 @@
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { BarHeader } from '../components/common/@';
-import { useAppContext } from '../contexts/@';
+import { useContexts } from '../contexts/@';
 
 export default function () {
 	// component logic
-	const context = useAppContext();
+	const context = useContexts();
 	const navigate = useNavigate();
 	const pathname = useParams();
 
 	// dataset
-	const billTitle = context.bill?.title || pathname['billID'] || '';
+	const billTitle = context.bill.get()?.title || pathname['billID'] || '';
 
 	// actions
 	const goBack = () => navigate(-1);

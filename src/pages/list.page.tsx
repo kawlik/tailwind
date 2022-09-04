@@ -3,11 +3,13 @@ import { FaLightbulb } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { ListItem } from '../components/page/@';
 import { BgIcon, Input } from '../components/util/@';
+import { useContexts } from '../contexts/@';
 import { ListService } from '../services/@';
 import { BillInfoType } from '../types/@';
 
 export default function () {
 	// component logic
+	const contexts = useContexts();
 	const navigate = useNavigate();
 
 	// create state
@@ -22,7 +24,7 @@ export default function () {
 
 	// actions
 	const openBill = (bill: BillInfoType) => () => {
-		ListService.bill$.next(bill);
+		contexts.bill.set(bill);
 		navigate(`/bill/${bill.id}`);
 	};
 

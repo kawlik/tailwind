@@ -1,14 +1,14 @@
 import { User } from 'firebase/auth';
 import { createContext, useContext } from 'react';
-import { BillInfoType } from '../types/@';
+import { BillInfoType, ContextItemType } from '../types/@';
 
 // create context
 export const AuthContext = createContext<{
-	bill: BillInfoType | null;
-	user: User | null;
+	bill: ContextItemType<BillInfoType | null>;
+	user: ContextItemType<User | null>;
 }>({
-	bill: null,
-	user: null,
+	bill: { get: () => null, set: () => {} },
+	user: { get: () => null, set: () => {} },
 });
 
 // export consumer

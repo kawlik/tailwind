@@ -1,11 +1,11 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { useAppContext } from './contexts/@';
+import { useContexts } from './contexts/@';
 import { BillPage, ListPage, NewsPage, ProfilePage, ReportsPage } from './pages/@';
 import { BillScreen, HomeScreen, SignInScreen, SignUpScreen } from './screens/@';
 
 export default function () {
 	// component logic
-	const context = useAppContext();
+	const context = useContexts();
 
 	// component layout
 	return !context.user ? (

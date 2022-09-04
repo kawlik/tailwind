@@ -1,4 +1,4 @@
-import { doc, DocumentSnapshot } from 'firebase/firestore';
+import { doc, DocumentReference, DocumentSnapshot } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { BillDataType } from '../types/@';
 import { FirebaseService, FirestoreService } from './@';
@@ -10,11 +10,11 @@ class BillService<T> extends FirestoreDocument<T> {
 		super(new BehaviorSubject<T>(feed));
 	}
 
-	override register = (document: string) => {
+	override register = (document: string): DocumentReference => {
 		return doc(FirebaseService.Firestore, FirestoreService.Bill, document);
 	};
 
-	override callback = (snapshot: DocumentSnapshot) => {
+	override callback = (snapshot: DocumentSnapshot): void => {
 		const payload = snapshot.data();
 
 		this.subject$.next(payload as T);
