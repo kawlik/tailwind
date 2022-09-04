@@ -5,10 +5,10 @@ import { BillScreen, HomeScreen, SignInScreen, SignUpScreen } from './screens/@'
 
 export default function () {
 	// component logic
-	const context = useContexts();
+	const contexts = useContexts();
 
 	// component layout
-	return !context.user ? (
+	return !contexts.user ? (
 		<Routes>
 			{/* default fallback */}
 			<Route path="*" element={<Navigate to="signin" />} />

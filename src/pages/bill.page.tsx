@@ -25,6 +25,7 @@ export default function () {
 				{bill?.posts.map((bill, index) => (
 					<BillItem
 						key={index}
+						order={index}
 						payload={bill.payload}
 						timestamp={bill.timestamp.toDate().toLocaleDateString()}
 						type={bill.type}

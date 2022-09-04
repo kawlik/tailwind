@@ -5,12 +5,12 @@ import { useContexts } from '../contexts/@';
 
 export default function () {
 	// component logic
-	const context = useContexts();
+	const contexts = useContexts();
 	const navigate = useNavigate();
 	const pathname = useParams();
 
 	// dataset
-	const billTitle = context.bill.get()?.title || pathname['billID'] || '';
+	const billTitle = contexts.bill.get()?.title || pathname['billID'] || '';
 
 	// actions
 	const goBack = () => navigate(-1);
