@@ -6,19 +6,20 @@ import {
 	FaUser,
 	FaWallet,
 } from 'react-icons/fa';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { BarFooter, BarHeader } from '../components/common/@';
 import { AuthService } from '../services/@';
 
 export default function () {
 	// component logic
+	const navigate = useNavigate();
 	const pathname = useParams();
 
 	// dataset
 	const activePage = pathname['*'] || '';
 
 	// actions
-	const goCreateNewList = () => {};
+	const goCreateNewList = () => navigate('/bill/add-new/');
 
 	// component layout
 	return (

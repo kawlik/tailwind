@@ -21,8 +21,8 @@ export default function () {
 
 	// actions
 	const send = () => {
-        const payload = post;
-        setPost('');
+		const payload = post;
+		setPost('');
 
 		PostService.post(contexts.bill.get()?.id || pathname['billID'] || '', {
 			payload: post,

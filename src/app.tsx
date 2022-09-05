@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useContexts } from './contexts/@';
-import { BillPage, ListPage, NewsPage, ProfilePage, ReportsPage } from './pages/@';
+import { BillAddPage, BillPage, ListPage, NewsPage, ProfilePage, ReportsPage } from './pages/@';
 import { BillScreen, HomeScreen, SignInScreen, SignUpScreen } from './screens/@';
 
 export default function () {
@@ -24,6 +24,7 @@ export default function () {
 
 			{/* bill screen */}
 			<Route path="bill" element={<BillScreen />}>
+				<Route path="add-new" element={<BillAddPage />} />
 				<Route path=":billID" element={<BillPage />} />
 			</Route>
 
