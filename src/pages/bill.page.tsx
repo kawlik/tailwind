@@ -21,7 +21,7 @@ export default function () {
 	// component layout
 	return (
 		<>
-			<ul className="flex flex-1 flex-col-reverse gap-2 overflow-y-scroll px-3">
+			<ul className="flex flex-1 flex-col-reverse gap-2 overflow-y-scroll pb-2 px-3">
 				{bill?.posts.map((bill, index) => (
 					<BillItem
 						key={index}
