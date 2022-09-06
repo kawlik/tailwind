@@ -12,12 +12,15 @@ export default function () {
 	const contexts = useContexts();
 	const navigate = useNavigate();
 
+	// dataset
+	const myPhone = contexts.user.get()?.phoneNumber || '';
+
 	// create state
 	const [list, setList] = useState<BillInfoType[]>([]);
 
 	// update state
 	useEffect(() => {
-		BillInfoService.subscribeOn('667-941-501').subscribe((list) => setList(list));
+		BillInfoService.subscribeOn(myPhone).subscribe((list) => setList(list));
 
 		return () => BillInfoService.unsubscribe();
 	}, []);

@@ -1,7 +1,11 @@
 import { FaMinus } from 'react-icons/fa';
 import { BtnIcon } from '../util/@';
 
-export default function (props: { remove(user: string): void; usersList: string[] }) {
+export default function (props: {
+	myPhoneNumber: string;
+	remove(user: string): void;
+	usersList: string[];
+}) {
 	// component logic
 
 	// component layout
@@ -10,7 +14,7 @@ export default function (props: { remove(user: string): void; usersList: string[
 			{props.usersList.map((user) => (
 				<li className="flex flex-nowrap items-center gap-2" key={user}>
 					<BtnIcon
-						disabled={user === '667-941-501'}
+						disabled={user === props.myPhoneNumber}
 						icon={FaMinus}
 						onClick={() => props.remove(user)}
 					/>

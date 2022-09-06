@@ -1,13 +1,11 @@
 import { FormEvent, useState } from 'react';
 import { FaShieldAlt } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 import { AuthService, PhoneService } from '../../services/@';
 import { Input } from '../util/@';
 import { SignInBtn } from './@';
 
 export default function () {
 	// component logic
-	const navigate = useNavigate();
 
 	// create state
 	const [phone, setPhone] = useState('');

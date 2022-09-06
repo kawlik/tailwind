@@ -2,16 +2,21 @@ import { Timestamp } from 'firebase/firestore';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BillAddStart, BillAddTitle, BillAddUser, BillAddUsers } from '../components/page/@';
+import { useContexts } from '../contexts/@';
 import { BillInfoService, PhoneService } from '../services/@';
 
 export default function () {
 	// component logic
+	const contexts = useContexts();
 	const navigate = useNavigate();
+
+	// dataset
+	const myPhone = contexts.user.get()?.phoneNumber || '';
 
 	// create state
 	const [phone, setPhone] = useState('');
 	const [title, setTitle] = useState('');
-	const [users, setUsers] = useState(['667-941-501']);
+	const [users, setUsers] = useState([myPhone]);
 
 	// update state
 	const updatePhone = (event: FormEvent<HTMLInputElement>) => {
@@ -57,7 +62,7 @@ export default function () {
 			<section className="flex flex-1 flex-col gap-4 px-3 py-1 overflow-y-scroll">
 				<BillAddTitle onChange={updateTitle} value={title} />
 				<BillAddUser onChange={updatePhone} onUpdate={updateUsers} value={phone} />
-				<BillAddUsers remove={removeUsers} usersList={users} />
+				<BillAddUsers myPhoneNumber={myPhone} remove={removeUsers} usersList={users} />
 			</section>
 			<BillAddStart action={createBill} disabled={!title.length} />
 		</>
