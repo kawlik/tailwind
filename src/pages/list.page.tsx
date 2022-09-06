@@ -17,7 +17,7 @@ export default function () {
 
 	// update state
 	useEffect(() => {
-		ListService.subscribeOn('User 1').subscribe((list) => setList(list));
+		ListService.subscribeOn('667-941-501').subscribe((list) => setList(list));
 
 		return ListService.unsubscribe;
 	}, []);

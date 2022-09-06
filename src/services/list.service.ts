@@ -1,4 +1,13 @@
-import { collection, Query, query, QuerySnapshot, where } from 'firebase/firestore';
+import {
+	addDoc,
+	collection,
+	doc,
+	Query,
+	query,
+	QuerySnapshot,
+	setDoc,
+	where,
+} from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { BillInfoType } from '../types/@';
 import { FirebaseService, FirestoreService } from './@';
@@ -25,6 +34,20 @@ class ListService<T> extends FirestoreQuery<T> {
 
 		this.subject$.next(payload as T);
 	};
+
+	async updateList(billInfo: BillInfoType): Promise<string> {
+		const billInfoDoc = await addDoc(
+			collection(FirebaseService.Firestore, FirestoreService.List),
+			billInfo,
+		);
+
+		const billDataDoc = await setDoc(
+			doc(FirebaseService.Firestore, FirestoreService.Bill, billInfoDoc.id),
+			{ posts: [] },
+		);
+
+		return billInfoDoc.id;
+	}
 }
 
 // export service

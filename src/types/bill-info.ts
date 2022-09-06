@@ -1,10 +1,10 @@
 import { Timestamp } from 'firebase/firestore';
 
 export default interface BillInfo {
-	id: string;
+	id?: string;
 	participants: string[];
-	timestampCreated: Timestamp;
 	timestampClosed?: Timestamp;
-	timestampUpdate?: Timestamp;
+	timestampCreated: Timestamp;
+	timestampUpdated: Timestamp;
 	title: string;
 }

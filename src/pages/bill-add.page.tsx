@@ -1,9 +1,12 @@
+import { Timestamp } from 'firebase/firestore';
 import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BillAddStart, BillAddTitle, BillAddUser, BillAddUsers } from '../components/page/@';
-import { PhoneService } from '../services/@';
+import { ListService, PhoneService } from '../services/@';
 
 export default function () {
 	// component logic
+	const navigate = useNavigate();
 
 	// create state
 	const [phone, setPhone] = useState('');
@@ -30,6 +33,24 @@ export default function () {
 		setUsers(users.filter((user) => user !== remove));
 	};
 
+	// actions
+	const createBill = async () => {
+		const payload = title;
+		setTitle('');
+
+		const billID = await ListService.updateList({
+			participants: users,
+			timestampCreated: Timestamp.now(),
+			timestampUpdated: Timestamp.now(),
+			title: payload,
+		}).catch((err: unknown) => {
+			alert('Your bill was not published for unknown reasons.\nPlease try again later.');
+			setTitle(payload);
+		});
+
+		if (billID) navigate(`/bill/${billID}/`, { replace: true });
+	};
+
 	// component layout
 	return (
 		<>
@@ -38,7 +59,7 @@ export default function () {
 				<BillAddUser onChange={updatePhone} onUpdate={updateUsers} value={phone} />
 				<BillAddUsers remove={removeUsers} usersList={users} />
 			</section>
-			<BillAddStart action={() => {}} disabled={!title.length} />
+			<BillAddStart action={createBill} disabled={!title.length} />
 		</>
 	);
 }
