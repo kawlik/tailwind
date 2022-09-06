@@ -35,7 +35,7 @@ export default function () {
 			{list.map((item) => (
 				<ListItem
 					action={openBill(item)}
-					id={item.id}
+					id={item.id!}
 					key={item.id}
 					participants={item.participants}
 					timestamp={item.timestampCreated.toDate().toLocaleDateString()}
