@@ -11,7 +11,7 @@ class BillService<T> extends FirestoreDocument<T> {
 	}
 
 	override register = (document: string): DocumentReference => {
-		return doc(FirebaseService.Firestore, FirestoreService.Bill, document);
+		return doc(FirebaseService.Firestore, FirestoreService.BillData, document);
 	};
 
 	override callback = (snapshot: DocumentSnapshot): void => {

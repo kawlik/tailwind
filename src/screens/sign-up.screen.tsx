@@ -11,7 +11,7 @@ export default function () {
 		<>
 			<BgIcon icon={FaLock} />
 			<section className="flex flex-1 flex-col gap-3 p-4">
-				<h2 className="font-bold text-xl">Sign up via email</h2>
+				<h2 className="font-bold text-xl">Sign up via OTP</h2>
 				<SignUpForm />
 			</section>
 			<Link to="/signin" className="font-semibold text-center text-lg m-3 mt-auto">

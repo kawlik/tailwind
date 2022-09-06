@@ -8,7 +8,9 @@ class FirebaseService {
 	constructor(
 		private auth = getAuth(FirebaseConfig),
 		private firestore = initializeFirestore(FirebaseConfig, {}),
-	) {}
+	) {
+		this.auth.languageCode = 'pl';
+	}
 
 	get Auth() {
 		return this.auth;

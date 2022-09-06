@@ -2,7 +2,7 @@ import { Timestamp } from 'firebase/firestore';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BillAddStart, BillAddTitle, BillAddUser, BillAddUsers } from '../components/page/@';
-import { ListService, PhoneService } from '../services/@';
+import { BillInfoService, PhoneService } from '../services/@';
 
 export default function () {
 	// component logic
@@ -38,7 +38,7 @@ export default function () {
 		const payload = title;
 		setTitle('');
 
-		const billID = await ListService.updateList({
+		const billID = await BillInfoService.updateList({
 			participants: users,
 			timestampCreated: Timestamp.now(),
 			timestampUpdated: Timestamp.now(),

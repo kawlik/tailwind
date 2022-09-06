@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { BillInput, BillItem } from '../components/page/@';
-import { BillService } from '../services/@';
+import { BillDataService } from '../services/@';
 import { BillDataType } from '../types/@';
 
 export default function () {
@@ -13,9 +13,9 @@ export default function () {
 
 	// update state
 	useEffect(() => {
-		BillService.subscribeOn(pathname['billID']!).subscribe((bill) => setBill(bill));
+		BillDataService.subscribeOn(pathname['billID']!).subscribe((bill) => setBill(bill));
 
-		return () => BillService.unsubscribe();
+		return () => BillDataService.unsubscribe();
 	}, []);
 
 	// component layout

@@ -9,7 +9,7 @@ class PostService {
 	}
 
 	private getRef(document: string) {
-		return doc(FirebaseService.Firestore, FirestoreService.Bill, document);
+		return doc(FirebaseService.Firestore, FirestoreService.BillData, document);
 	}
 
 	private update(payload: BIllPostType) {

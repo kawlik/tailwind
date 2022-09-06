@@ -4,9 +4,11 @@ import { BillInfoType, ContextItemType } from '../types/@';
 
 // create context
 export const AuthContext = createContext<{
+	auth: boolean;
 	bill: ContextItemType<BillInfoType | null>;
 	user: ContextItemType<User | null>;
 }>({
+	auth: false,
 	bill: { get: () => null, set: () => {} },
 	user: { get: () => null, set: () => {} },
 });

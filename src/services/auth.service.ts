@@ -1,13 +1,13 @@
 import {
 	GoogleAuthProvider,
-	onAuthStateChanged,
+	RecaptchaVerifier,
 	signInAnonymously,
+	signInWithPhoneNumber,
 	signInWithPopup,
-	Unsubscribe,
 	User,
 } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
-import { FirebaseService } from './@';
+import { FirebaseService, PhoneService } from './@';
 import { FirestoreAuth } from './common/@';
 
 // define service
@@ -17,11 +17,19 @@ class AuthService extends FirestoreAuth {
 	}
 
 	logout(): void {
-		FirebaseService.Auth.signOut();
+		if (confirm('Are you sure you want to log out?')) FirebaseService.Auth.signOut();
 	}
 
 	signInAnonymously(): void {
 		signInAnonymously(FirebaseService.Auth);
+	}
+
+	signInWithPhoneNumber(phone: string): void {
+		if (!PhoneService.isValidPhoneNumber(phone)) return alert('Invalid phone number!');
+
+		this.prepareSignInWithPhoneNumber(PhoneService.convertToE164(phone)).then((res) => {
+			res.confirm(prompt('Validate your OTP:', '') || '');
+		});
 	}
 
 	signInWithGoogle(): void {

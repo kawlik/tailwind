@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ListItem } from '../components/page/@';
 import { BgIcon, Input } from '../components/util/@';
 import { useContexts } from '../contexts/@';
-import { ListService } from '../services/@';
+import { BillInfoService } from '../services/@';
 import { BillInfoType } from '../types/@';
 
 export default function () {
@@ -17,15 +17,15 @@ export default function () {
 
 	// update state
 	useEffect(() => {
-		ListService.subscribeOn('667-941-501').subscribe((list) => setList(list));
+		BillInfoService.subscribeOn('667-941-501').subscribe((list) => setList(list));
 
-		return ListService.unsubscribe;
+		return () => BillInfoService.unsubscribe();
 	}, []);
 
 	// actions
 	const openBill = (bill: BillInfoType) => () => {
 		contexts.bill.set(bill);
-		navigate(`/bill/${bill.id}`);
+		navigate(`/bill/${bill.id}/`);
 	};
 
 	// component layout

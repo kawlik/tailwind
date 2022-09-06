@@ -15,7 +15,7 @@ export default function (props: { children: JSX.Element | JSX.Element[] }) {
 	useEffect(() => {
 		AuthService.subscribeOn().subscribe((user) => setUser(user));
 
-		return AuthService.unsubscribe();
+		return () => AuthService.unsubscribe();
 	}, []);
 
 	// component layout
@@ -23,6 +23,7 @@ export default function (props: { children: JSX.Element | JSX.Element[] }) {
 		<AuthContext.Provider
 			children={props.children}
 			value={{
+				auth: !!user,
 				bill: { get: () => bill, set: setBill },
 				user: { get: () => user, set: setUser },
 			}}

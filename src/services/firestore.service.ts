@@ -1,13 +1,13 @@
 // define service
 class FirestoreService {
-	constructor(private bill = 'bill', private list = 'list') {}
+	constructor(private billData = 'bill-data', private listInfo = 'bill-info') {}
 
-	get Bill() {
-		return this.bill;
+	get BillData() {
+		return this.billData;
 	}
 
-	get List() {
-		return this.list;
+	get BillInfo() {
+		return this.listInfo;
 	}
 }
 

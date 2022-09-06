@@ -8,7 +8,7 @@ export default function () {
 	const contexts = useContexts();
 
 	// component layout
-	return !contexts.user ? (
+	return !contexts.auth ? (
 		<Routes>
 			{/* default fallback */}
 			<Route path="*" element={<Navigate to="signin" />} />

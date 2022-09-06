@@ -1,4 +1,6 @@
-import { BtnLabel, Input } from '../util/@';
+import { FaShieldAlt } from 'react-icons/fa';
+import { Input } from '../util/@';
+import { SignInBtn } from './@';
 
 export default function (props: {}) {
 	// component logic
@@ -6,10 +8,14 @@ export default function (props: {}) {
 	// component layout
 	return (
 		<form className="flex flex-col gap-2 items-stretch">
-			<Input placeholder="Email" type="text" value="" />
-			<Input placeholder="Password #1" type="password" value="" />
-			<Input placeholder="Password #2" type="password" value="" />
-			<BtnLabel disabled={true} label="Sign up" />
+			<Input placeholder="Your phone number" type="tel" value="" />
+			<Input placeholder="Your username" type="text" value="" />
+			<SignInBtn
+				disabled={true}
+				id="recaptcha-otp"
+				icon={FaShieldAlt}
+				label="Generate OTP"
+			/>
 		</form>
 	);
 }

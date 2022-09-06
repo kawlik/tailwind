@@ -21,7 +21,7 @@ class ListService<T> extends FirestoreQuery<T> {
 
 	override register = (document: string): Query => {
 		return query(
-			collection(FirebaseService.Firestore, FirestoreService.List),
+			collection(FirebaseService.Firestore, FirestoreService.BillInfo),
 			where('participants', 'array-contains', document),
 		);
 	};
@@ -37,12 +37,12 @@ class ListService<T> extends FirestoreQuery<T> {
 
 	async updateList(billInfo: BillInfoType): Promise<string> {
 		const billInfoDoc = await addDoc(
-			collection(FirebaseService.Firestore, FirestoreService.List),
+			collection(FirebaseService.Firestore, FirestoreService.BillInfo),
 			billInfo,
 		);
 
 		const billDataDoc = await setDoc(
-			doc(FirebaseService.Firestore, FirestoreService.Bill, billInfoDoc.id),
+			doc(FirebaseService.Firestore, FirestoreService.BillData, billInfoDoc.id),
 			{ posts: [] },
 		);
 

@@ -10,7 +10,7 @@ export default function () {
 	const pathname = useParams();
 
 	// dataset
-	const billTitle = contexts.bill.get()?.title || pathname['billID'] || '';
+	const billTitle = contexts.bill.get()?.title || pathname['billID'] || 'Bill';
 
 	// actions
 	const goBack = () => navigate(-1);

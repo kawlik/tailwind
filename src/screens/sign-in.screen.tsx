@@ -12,7 +12,7 @@ export default function () {
 		<>
 			<BgIcon icon={FaLock} />
 			<section className="flex flex-1 flex-col gap-3 p-4">
-				<h2 className="font-bold text-xl">Sign in via email</h2>
+				<h2 className="font-bold text-xl">Sign in via OTP</h2>
 				<SignInForm />
 				<h2 className="font-bold text-xl">or use third party</h2>
 				<div className="flex flex-1 flex-col gap-2">
