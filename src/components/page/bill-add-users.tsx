@@ -1,42 +1,23 @@
-import { FormEvent } from 'react';
-import { FaList, FaUserPlus } from 'react-icons/fa';
-import { PhoneService } from '../../services/@';
-import { BtnIcon, Input } from '../util/@';
+import { FaMinus } from 'react-icons/fa';
+import { BtnIcon } from '../util/@';
 
-export default function (props: {
-	onChange?(event: FormEvent<HTMLInputElement>): void;
-	onUpdate?(): void;
-	value: string;
-}) {
+export default function (props: { remove(user: string): void; usersList: string[] }) {
 	// component logic
-	const invalidPhoneNumber = !PhoneService.isValidPhoneNumber(props.value);
 
 	// component layout
 	return (
-		<div>
-			<h4 className="font-semibold">Add user</h4>
-			<div className="flex flex-nowrap gap-2">
-				<div className="flex flex-1 flex-col">
-					<Input
-						onChange={props.onChange}
-						placeholder="User phone number"
-						type="tel"
-						value={props.value}
-					/>
-				</div>
-				<div className="flex flex-nowrap gap-2">
+		<ul className="flex flex-col-reverse gap-2">
+			{props.usersList.map((user) => (
+				<li className="flex flex-nowrap items-center gap-2" key={user}>
 					<BtnIcon
-						disabled={invalidPhoneNumber}
-						icon={FaUserPlus}
-						onClick={props.onUpdate}
+						disabled={user === '667-941-501'}
+						icon={FaMinus}
+						onClick={() => props.remove(user)}
 					/>
-					<BtnIcon disabled={true} icon={FaList} />
-				</div>
-			</div>
-			<p className="text-sm">
-				<span className="italic">Valid format is: </span>
-				<span className="text-lg font-mono">XXX-XXX-XXX</span>
-			</p>
-		</div>
+					<span className="font-semibold leading-none text-lg">{user}</span>
+				</li>
+			))}
+			<h4 className="font-semibold">Participants</h4>
+		</ul>
 	);
 }
