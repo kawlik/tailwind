@@ -1,12 +1,12 @@
+import { isValidPhoneNumber } from 'react-phone-number-input';
+
 // define service
 class PostService {
 	convertToE164(phone: string): string {
 		return `+48${phone.replaceAll('-', '')}`;
 	}
 
-	isValidPhoneNumber(value: string): boolean {
-		return !!value.match(/\d{3}-\d{3}-\d{3}/)?.length;
-	}
+	isValidPhoneNumber = isValidPhoneNumber;
 
 	parseToPhoneNumber(input: string): string {
 		if (input.length <= 3 && !input.includes('-')) return input;

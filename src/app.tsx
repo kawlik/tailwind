@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useContexts } from './contexts/@';
 import { BillAddPage, BillPage, ListPage, NewsPage, ProfilePage, ReportsPage } from './pages/@';
-import { BillScreen, HomeScreen, SignInScreen, SignUpScreen } from './screens/@';
+import { BillScreen, HomeScreen, OTPCreateScreen, OTPVerifyScreen } from './screens/@';
 
 export default function () {
 	// component logic
@@ -11,11 +11,11 @@ export default function () {
 	return !contexts.auth ? (
 		<Routes>
 			{/* default fallback */}
-			<Route path="*" element={<Navigate to="signin" />} />
+			<Route path="*" element={<Navigate to="otp-create" />} />
 
 			{/* auth utils screen */}
-			<Route path="signin" element={<SignInScreen />} />
-			<Route path="signup" element={<SignUpScreen />} />
+			<Route path="otp-create" element={<OTPCreateScreen />} />
+			<Route path="otp-verify" element={<OTPVerifyScreen />} />
 		</Routes>
 	) : (
 		<Routes>

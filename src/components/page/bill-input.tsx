@@ -1,5 +1,5 @@
 import { Timestamp } from 'firebase/firestore';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { FaPaperPlane, FaPlus } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { useContexts } from '../../contexts/@';
@@ -13,11 +13,6 @@ export default function () {
 
 	// create state
 	const [post, setPost] = useState('');
-
-	// update state
-	const updatePost = (event: FormEvent<HTMLInputElement>) => {
-		setPost(event.currentTarget.value);
-	};
 
 	// actions
 	const send = () => {
@@ -39,7 +34,7 @@ export default function () {
 	return (
 		<aside className="flex flex-nowrap gap-2 pb-4 pt-2 px-3">
 			<div className="flex flex-1 flex-col">
-				<Input onChange={updatePost} placeholder="Type here" type="text" value={post} />
+				<Input onChange={setPost} placeholder="Type here" type="text" value={post} />
 			</div>
 			<div className="flex flex-nowrap gap-2">
 				<BtnIcon disabled={!post} icon={FaPaperPlane} onClick={send} />

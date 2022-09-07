@@ -8,15 +8,15 @@ class PostService {
 		await updateDoc(this.getRef(document), this.update(payload));
 	}
 
-	private getRef(document: string) {
+	private getRef = (document: string) => {
 		return doc(FirebaseService.Firestore, FirestoreService.BillData, document);
-	}
+	};
 
-	private update(payload: BIllPostType) {
+	private update = (payload: BIllPostType) => {
 		return {
 			posts: arrayUnion(payload),
 		};
-	}
+	};
 }
 
 // export service

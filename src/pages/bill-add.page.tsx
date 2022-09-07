@@ -1,9 +1,9 @@
 import { Timestamp } from 'firebase/firestore';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BillAddStart, BillAddTitle, BillAddUser, BillAddUsers } from '../components/page/@';
 import { useContexts } from '../contexts/@';
-import { BillInfoService, PhoneService } from '../services/@';
+import { BillInfoService } from '../services/@';
 
 export default function () {
 	// component logic
@@ -19,16 +19,6 @@ export default function () {
 	const [users, setUsers] = useState([myPhone]);
 
 	// update state
-	const updatePhone = (event: FormEvent<HTMLInputElement>) => {
-		const parsed = PhoneService.parseToPhoneNumber(event.currentTarget.value);
-
-		setPhone(parsed);
-	};
-
-	const updateTitle = (event: FormEvent<HTMLInputElement>) => {
-		setTitle(event.currentTarget.value.slice(0, 32));
-	};
-
 	const updateUsers = () => {
 		setUsers([...new Set([...users, phone])].slice(0, 6));
 		setPhone('');
@@ -60,8 +50,8 @@ export default function () {
 	return (
 		<>
 			<section className="flex flex-1 flex-col gap-4 px-3 py-1 overflow-y-scroll">
-				<BillAddTitle onChange={updateTitle} value={title} />
-				<BillAddUser onChange={updatePhone} onUpdate={updateUsers} value={phone} />
+				<BillAddTitle onChange={setTitle} value={title} />
+				<BillAddUser onChange={setPhone} onUpdate={updateUsers} value={phone} />
 				<BillAddUsers myPhoneNumber={myPhone} remove={removeUsers} usersList={users} />
 			</section>
 			<BillAddStart action={createBill} disabled={!title.length} />

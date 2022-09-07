@@ -1,3 +1,3 @@
-export { default as SignInBtn } from './sign-in-btn';
-export { default as SignInForm } from './sign-in-form';
-export { default as SignUpForm } from './sign-up-form';
+export { default as OTPAction } from './otp-action';
+export { default as OTPButton } from './otp-button';
+export { default as OTPHeader } from './otp-header';

@@ -35,7 +35,7 @@ class ListService<T> extends FirestoreQuery<T> {
 		this.subject$.next(payload as T);
 	};
 
-	async updateList(billInfo: BillInfoType): Promise<string> {
+	updateList = async (billInfo: BillInfoType): Promise<string> => {
 		const billInfoDoc = await addDoc(
 			collection(FirebaseService.Firestore, FirestoreService.BillInfo),
 			billInfo,
@@ -47,7 +47,7 @@ class ListService<T> extends FirestoreQuery<T> {
 		);
 
 		return billInfoDoc.id;
-	}
+	};
 }
 
 // export service

@@ -1,40 +1,53 @@
 import {
-	GoogleAuthProvider,
+	ConfirmationResult,
+	RecaptchaParameters,
 	RecaptchaVerifier,
-	signInAnonymously,
 	signInWithPhoneNumber,
-	signInWithPopup,
 	User,
 } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
-import { FirebaseService, PhoneService } from './@';
+import { FirebaseService } from './@';
 import { FirestoreAuth } from './common/@';
 
 // define service
 class AuthService extends FirestoreAuth {
-	constructor() {
+	constructor(
+		private recapthcaDOMRef: string = 'recaptcha-refrence',
+		private recapthcaParams: RecaptchaParameters = { size: 'invisible' },
+		private recapthcaResult: ConfirmationResult | null = null,
+		private recapthcaVerifier: RecaptchaVerifier | null = null,
+	) {
 		super(new BehaviorSubject<User | null>(null));
 	}
 
-	logout(): void {
+	logout = (): void => {
 		if (confirm('Are you sure you want to log out?')) FirebaseService.Auth.signOut();
-	}
+	};
 
-	signInAnonymously(): void {
-		signInAnonymously(FirebaseService.Auth);
-	}
+	createOTP = async (phone: string): Promise<void> => {
+		await this.prepare()
+			.then(() => this.attempt(phone))
+			.then((result) => (this.recapthcaResult = result));
+	};
 
-	signInWithPhoneNumber(phone: string): void {
-		if (!PhoneService.isValidPhoneNumber(phone)) return alert('Invalid phone number!');
+	verifyOTP = async (code: string): Promise<void> => {
+		this.recapthcaResult?.confirm(code);
+	};
 
-		this.prepareSignInWithPhoneNumber(PhoneService.convertToE164(phone)).then((res) => {
-			res.confirm(prompt('Validate your OTP:', '') || '');
-		});
-	}
+	private attempt = (phone: string) => {
+		return signInWithPhoneNumber(FirebaseService.Auth, phone, this.recapthcaVerifier!);
+	};
 
-	signInWithGoogle(): void {
-		signInWithPopup(FirebaseService.Auth, new GoogleAuthProvider());
-	}
+	private prepare = (): Promise<number> => {
+		this.recapthcaVerifier?.clear();
+		this.recapthcaVerifier = new RecaptchaVerifier(
+			this.recapthcaDOMRef,
+			this.recapthcaParams,
+			FirebaseService.Auth,
+		);
+
+		return this.recapthcaVerifier.render();
+	};
 }
 
 // export service

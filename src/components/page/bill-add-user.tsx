@@ -1,11 +1,10 @@
-import { FormEvent } from 'react';
 import { FaList, FaUserPlus } from 'react-icons/fa';
 import { PhoneService } from '../../services/@';
 import { BtnIcon, Input } from '../util/@';
 
 export default function (props: {
-	onChange?(event: FormEvent<HTMLInputElement>): void;
-	onUpdate?(): void;
+	onChange(value: string): void;
+	onUpdate(): void;
 	value: string;
 }) {
 	// component logic
@@ -17,7 +16,7 @@ export default function (props: {
 			<div className="flex flex-nowrap gap-2">
 				<div className="flex flex-1 flex-col">
 					<Input
-						onChange={props.onChange}
+						onChange={(e) => props.onChange(e.currentTarget.value)}
 						placeholder="New participant"
 						type="tel"
 						value={props.value}
