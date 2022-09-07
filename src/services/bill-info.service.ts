@@ -1,54 +1,25 @@
-import {
-	addDoc,
-	collection,
-	doc,
-	Query,
-	query,
-	QuerySnapshot,
-	setDoc,
-	where,
-} from 'firebase/firestore';
+import { doc, DocumentReference, DocumentSnapshot } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { BillInfoType } from '../types/@';
 import { FirebaseService, FirestoreService } from './@';
-import { FirestoreQuery } from './common/@';
+import { FirestoreDocument } from './common/@';
 
 // define service
-class ListService<T> extends FirestoreQuery<T> {
+class BillInfoService<T> extends FirestoreDocument<T> {
 	constructor(feed: T) {
 		super(new BehaviorSubject<T>(feed));
 	}
 
-	override register = (document: string): Query => {
-		return query(
-			collection(FirebaseService.Firestore, FirestoreService.BillInfo),
-			where('participants', 'array-contains', document),
-		);
+	override register = (document: string): DocumentReference => {
+		return doc(FirebaseService.Firestore, FirestoreService.BillInfo, document);
 	};
 
-	override callback = (snapshot: QuerySnapshot): void => {
-		const payload = snapshot.docs.map((doc) => ({
-			...doc.data(),
-			id: doc.id,
-		}));
+	override callback = (snapshot: DocumentSnapshot): void => {
+		const payload = snapshot.data();
 
 		this.subject$.next(payload as T);
-	};
-
-	updateList = async (billInfo: BillInfoType): Promise<string> => {
-		const billInfoDoc = await addDoc(
-			collection(FirebaseService.Firestore, FirestoreService.BillInfo),
-			billInfo,
-		);
-
-		const billDataDoc = await setDoc(
-			doc(FirebaseService.Firestore, FirestoreService.BillData, billInfoDoc.id),
-			{ posts: [] },
-		);
-
-		return billInfoDoc.id;
 	};
 }
 
 // export service
-export default new ListService<BillInfoType[]>([]);
+export default new BillInfoService<BillInfoType | null>(null);

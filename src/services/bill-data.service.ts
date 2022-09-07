@@ -5,7 +5,7 @@ import { FirebaseService, FirestoreService } from './@';
 import { FirestoreDocument } from './common/@';
 
 // define service
-class BillService<T> extends FirestoreDocument<T> {
+class BillDataService<T> extends FirestoreDocument<T> {
 	constructor(feed: T) {
 		super(new BehaviorSubject<T>(feed));
 	}
@@ -22,4 +22,4 @@ class BillService<T> extends FirestoreDocument<T> {
 }
 
 // export service
-export default new BillService<BillDataType | null>(null);
+export default new BillDataService<BillDataType | null>(null);

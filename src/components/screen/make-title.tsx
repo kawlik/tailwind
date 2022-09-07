@@ -7,7 +7,7 @@ export default function (props: { onChange(value: string): void; value: string }
 	return (
 		<div className="flex flex-col">
 			<Input
-				onChange={(e) => props.onChange(e.currentTarget.value)}
+				onChange={props.onChange}
 				placeholder="Title"
 				type="text"
 				value={props.value}

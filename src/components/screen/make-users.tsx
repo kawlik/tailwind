@@ -1,12 +1,13 @@
 import { FaMinus } from 'react-icons/fa';
+import { useContexts } from '../../contexts/@';
 import { BtnIcon } from '../util/@';
 
-export default function (props: {
-	myPhoneNumber: string;
-	remove(user: string): void;
-	usersList: string[];
-}) {
+export default function (props: { remove(user: string): void; usersList: string[] }) {
 	// component logic
+	const contexts = useContexts();
+
+	// dataset
+	const disabled = contexts.user.get()?.phoneNumber;
 
 	// component layout
 	return (
@@ -14,7 +15,7 @@ export default function (props: {
 			{props.usersList.map((user) => (
 				<li className="flex flex-nowrap items-center gap-2" key={user}>
 					<BtnIcon
-						disabled={user === props.myPhoneNumber}
+						disabled={user === disabled}
 						icon={FaMinus}
 						onClick={() => props.remove(user)}
 					/>

@@ -1,24 +1,28 @@
 import { Timestamp } from 'firebase/firestore';
 import { useState } from 'react';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { BillAddStart, BillAddTitle, BillAddUser, BillAddUsers } from '../components/page/@';
+import { BarHeader } from '../components/common/@';
+import { MakeStart, MakeTitle, MakeUser, MakeUsers } from '../components/screen/@';
 import { useContexts } from '../contexts/@';
-import { BillInfoService } from '../services/@';
+import { BillListService } from '../services/@';
 
 export default function () {
 	// component logic
 	const contexts = useContexts();
 	const navigate = useNavigate();
 
-	// dataset
-	const myPhone = contexts.user.get()?.phoneNumber || '';
-
 	// create state
 	const [phone, setPhone] = useState('');
 	const [title, setTitle] = useState('');
-	const [users, setUsers] = useState([myPhone]);
+	const [users, setUsers] = useState([contexts.user.get()?.phoneNumber!]);
 
-	// update state
+	// dataset
+	const isInvalidData = !title.length && !users.length;
+
+	// actions
+	const goBack = () => navigate(-1);
+
 	const updateUsers = () => {
 		setUsers([...new Set([...users, phone])].slice(0, 6));
 		setPhone('');
@@ -28,19 +32,17 @@ export default function () {
 		setUsers(users.filter((user) => user !== remove));
 	};
 
-	// actions
 	const createBill = async () => {
-		const payload = title;
 		setTitle('');
+		setUsers([]);
 
-		const billID = await BillInfoService.updateList({
+		const billID = await BillListService.updateList({
 			participants: users,
 			timestampCreated: Timestamp.now(),
 			timestampUpdated: Timestamp.now(),
-			title: payload,
+			title: title,
 		}).catch((err: unknown) => {
 			alert('Your bill was not published for unknown reasons.\nPlease try again later.');
-			setTitle(payload);
 		});
 
 		if (billID) navigate(`/bill/${billID}/`, { replace: true });
@@ -49,12 +51,19 @@ export default function () {
 	// component layout
 	return (
 		<>
+			<BarHeader
+				actionL={goBack}
+				iconL={FaArrowLeft}
+				iconR={FaArrowRight}
+				label={'Add new bill'}
+				skipR={true}
+			/>
 			<section className="flex flex-1 flex-col gap-4 px-3 py-1 overflow-y-scroll">
-				<BillAddTitle onChange={setTitle} value={title} />
-				<BillAddUser onChange={setPhone} onUpdate={updateUsers} value={phone} />
-				<BillAddUsers myPhoneNumber={myPhone} remove={removeUsers} usersList={users} />
+				<MakeTitle onChange={setTitle} value={title} />
+				<MakeUser onChange={setPhone} onUpdate={updateUsers} value={phone} />
+				<MakeUsers remove={removeUsers} usersList={users} />
 			</section>
-			<BillAddStart action={createBill} disabled={!title.length} />
+			<MakeStart action={createBill} disabled={isInvalidData} />
 		</>
 	);
 }

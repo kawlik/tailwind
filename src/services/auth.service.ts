@@ -31,7 +31,7 @@ class AuthService extends FirestoreAuth {
 	};
 
 	verifyOTP = async (code: string): Promise<void> => {
-		this.recapthcaResult?.confirm(code);
+		await this.recapthcaResult?.confirm(code);
 	};
 
 	private attempt = (phone: string) => {

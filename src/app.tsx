@@ -1,7 +1,13 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useContexts } from './contexts/@';
-import { BillAddPage, BillPage, ListPage, NewsPage, ProfilePage, ReportsPage } from './pages/@';
-import { BillScreen, HomeScreen, OTPCreateScreen, OTPVerifyScreen } from './screens/@';
+import { BillPage, ListPage, NewsPage, ProfilePage, ReportsPage } from './pages/@';
+import {
+	BillScreen,
+	HomeScreen,
+	MakeScreen,
+	OTPCreateScreen,
+	OTPVerifyScreen,
+} from './screens/@';
 
 export default function () {
 	// component logic
@@ -24,7 +30,6 @@ export default function () {
 
 			{/* bill screen */}
 			<Route path="bill" element={<BillScreen />}>
-				<Route path="add-new" element={<BillAddPage />} />
 				<Route path=":billID" element={<BillPage />} />
 			</Route>
 
@@ -35,6 +40,9 @@ export default function () {
 				<Route path="profile" element={<ProfilePage />} />
 				<Route path="reports" element={<ReportsPage />} />
 			</Route>
+
+			{/* make screen */}
+			<Route path="make" element={<MakeScreen />} />
 		</Routes>
 	);
 }

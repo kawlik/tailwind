@@ -1,4 +1,3 @@
-export { default as BillAddPage } from './bill-add.page';
 export { default as BillPage } from './bill.page';
 export { default as ListPage } from './list.page';
 export { default as NewsPage } from './news.page';

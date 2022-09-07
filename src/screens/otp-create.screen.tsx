@@ -6,6 +6,9 @@ import { OTPAction, OTPHeader } from '../components/screen/@';
 import { BgIcon } from '../components/util/@';
 import { AuthService, PhoneService } from '../services/@';
 
+// assets
+import BgImage from '../assets/otp-create.png';
+
 export default function () {
 	// component logic
 	const navigate = useNavigate();
@@ -21,7 +24,6 @@ export default function () {
 		AuthService.createOTP(phone)
 			.then(() => navigate('/otp-verify/'))
 			.catch((err: unknown) => {
-                console.log(err);
 				alert('Your attempt has failed for unknown reasons.\nPlease try again later.');
 			});
 	};
@@ -36,7 +38,7 @@ export default function () {
 				skipL={true}
 				skipR={true}
 			/>
-			<OTPHeader />
+			<OTPHeader alt="OTP Create" image={BgImage} label="" />
 			<OTPAction
 				actionButton={generate}
 				actionUpdate={setPhone}

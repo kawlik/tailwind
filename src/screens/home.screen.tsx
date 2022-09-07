@@ -19,7 +19,7 @@ export default function () {
 	const activePage = pathname['*'] || '';
 
 	// actions
-	const goCreateNewList = () => navigate('/bill/add-new/');
+	const goCreateNewList = () => navigate('/make/');
 
 	// component layout
 	return (

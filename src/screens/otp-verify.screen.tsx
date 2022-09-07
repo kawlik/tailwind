@@ -6,6 +6,9 @@ import { OTPAction, OTPHeader } from '../components/screen/@';
 import { BgIcon } from '../components/util/@';
 import { AuthService } from '../services/@';
 
+// assets
+import BgImage from '../assets/otp-verify.png';
+
 export default function () {
 	// component logic
 	const navigate = useNavigate();
@@ -33,7 +36,7 @@ export default function () {
 				label="Verify OTP"
 				skipR={true}
 			/>
-			<OTPHeader />
+			<OTPHeader alt="OTP Verify" image={BgImage} label="" />
 			<OTPAction
 				actionButton={verify}
 				actionUpdate={setCode}
@@ -41,7 +44,7 @@ export default function () {
 				icon={FaStarHalfAlt}
 				inputType="otp"
 				label="Verify OTP"
-				title="Your phone number"
+				title="Your TOP code"
 				value={code}
 			/>
 			<BgIcon icon={FaLock} />

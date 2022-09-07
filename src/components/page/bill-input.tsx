@@ -16,7 +16,6 @@ export default function () {
 
 	// actions
 	const send = () => {
-		const payload = post;
 		setPost('');
 
 		PostService.post(contexts.bill.get()?.id || pathname['billID'] || '', {
@@ -26,7 +25,6 @@ export default function () {
 			user: contexts.user.get()?.uid || '',
 		}).catch((err: unknown) => {
 			alert('Your post was not published for unknown reasons.\nPlease try again later.');
-			setPost(payload);
 		});
 	};
 

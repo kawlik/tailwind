@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ListItem } from '../components/page/@';
 import { BgIcon, Input } from '../components/util/@';
 import { useContexts } from '../contexts/@';
-import { BillInfoService } from '../services/@';
+import { BillListService } from '../services/@';
 import { BillInfoType } from '../types/@';
 
 export default function () {
@@ -20,21 +20,18 @@ export default function () {
 
 	// update state
 	useEffect(() => {
-		BillInfoService.subscribeOn(myPhone).subscribe((list) => setList(list));
+		BillListService.subscribeOn(myPhone).subscribe((list) => setList(list));
 
-		return () => BillInfoService.unsubscribe();
+		return () => BillListService.unsubscribe();
 	}, []);
 
 	// actions
-	const openBill = (bill: BillInfoType) => () => {
-		contexts.bill.set(bill);
-		navigate(`/bill/${bill.id}/`);
-	};
+	const openBill = (bill: BillInfoType) => () => navigate(`/bill/${bill.id}/`);
 
 	// component layout
 	return (
 		<section className="flex flex-1 flex-col gap-3 overflow-y-scroll px-3 py-1">
-			<Input placeholder="Search" type="text" value="" />
+			<Input onChange={() => {}} placeholder="Search" type="text" value="" />
 			{list.map((item) => (
 				<ListItem
 					action={openBill(item)}
