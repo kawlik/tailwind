@@ -7,7 +7,7 @@ import {
 } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
 import { FirebaseService } from './@';
-import { FirestoreAuth } from './common/@';
+import { FirestoreAuth } from './utils/@';
 
 // define service
 class AuthService extends FirestoreAuth {

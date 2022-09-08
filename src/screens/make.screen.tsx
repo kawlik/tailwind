@@ -2,7 +2,7 @@ import { Timestamp } from 'firebase/firestore';
 import { useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { BarHeader } from '../components/common/@';
+import { BarHeader } from '../components/util/@';
 import { MakeStart, MakeTitle, MakeUser, MakeUsers } from '../components/screen/@';
 import { useContexts } from '../contexts/@';
 import { BillListService } from '../services/@';
@@ -18,7 +18,7 @@ export default function () {
 	const [users, setUsers] = useState([contexts.user.get()?.phoneNumber!]);
 
 	// dataset
-	const isInvalidData = !title.length && !users.length;
+	const isInvalidData = !title.length || !users.length;
 
 	// actions
 	const goBack = () => navigate(-1);
@@ -58,7 +58,7 @@ export default function () {
 				label={'Add new bill'}
 				skipR={true}
 			/>
-			<section className="flex flex-1 flex-col gap-4 px-3 py-1 overflow-y-scroll">
+			<section className="flex flex-1 flex-col gap-3 px-3 py-1 overflow-y-scroll">
 				<MakeTitle onChange={setTitle} value={title} />
 				<MakeUser onChange={setPhone} onUpdate={updateUsers} value={phone} />
 				<MakeUsers remove={removeUsers} usersList={users} />

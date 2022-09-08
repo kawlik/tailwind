@@ -7,7 +7,7 @@ import {
 	FaWallet,
 } from 'react-icons/fa';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { BarFooter, BarHeader } from '../components/common/@';
+import { BarFooter, BarHeader } from '../components/util/@';
 import { AuthService } from '../services/@';
 
 export default function () {

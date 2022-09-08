@@ -16,7 +16,7 @@ export default function (props: {
 
 	// component layout
 	return (
-		<section className="flex flex-1 flex-col gap-3 justify-center p-3">
+		<section className="bottom-0 flex flex-1 flex-col gap-3 justify-center p-3 sticky">
 			{props.inputType === 'tel' && (
 				<InputTel
 					onChange={props.actionUpdate}

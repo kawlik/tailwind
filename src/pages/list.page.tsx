@@ -20,7 +20,9 @@ export default function () {
 
 	// update state
 	useEffect(() => {
-		BillListService.subscribeOn(myPhone).subscribe((list) => setList(list));
+		BillListService.subscribeOn(myPhone).subscribe((list) =>
+			setList(list.sort(BillListService.sort)),
+		);
 
 		return () => BillListService.unsubscribe();
 	}, []);

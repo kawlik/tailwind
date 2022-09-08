@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { BarHeader } from '../components/common/@';
+import { BarHeader } from '../components/util/@';
 import { useContexts } from '../contexts/@';
 import { BillInfoService } from '../services/@';
 

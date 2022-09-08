@@ -1,7 +1,7 @@
 import { IconType } from 'react-icons';
 import { FaPlus } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
-import { BtnIconExposed, BtnIconLabel } from '../util/@';
+import { BtnIconExposed, BtnIconLabel } from './@';
 
 export default function (props: {
 	actionAdd(): void;

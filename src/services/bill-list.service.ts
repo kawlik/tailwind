@@ -2,6 +2,8 @@ import {
 	addDoc,
 	collection,
 	doc,
+	limit,
+	orderBy,
 	Query,
 	query,
 	QuerySnapshot,
@@ -11,7 +13,7 @@ import {
 import { BehaviorSubject } from 'rxjs';
 import { BillInfoType } from '../types/@';
 import { FirebaseService, FirestoreService } from './@';
-import { FirestoreQuery } from './common/@';
+import { FirestoreQuery } from './utils/@';
 
 // define service
 class BillListService<T> extends FirestoreQuery<T> {
@@ -33,6 +35,10 @@ class BillListService<T> extends FirestoreQuery<T> {
 		}));
 
 		this.subject$.next(payload as T);
+	};
+
+	sort = (a: BillInfoType, b: BillInfoType): number => {
+		return a.timestampUpdated.seconds > b.timestampUpdated.seconds ? -1 : 1;
 	};
 
 	updateList = async (billInfo: BillInfoType): Promise<string> => {

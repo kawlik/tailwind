@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FaArrowLeft, FaArrowRight, FaLock, FaShieldAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { BarHeader } from '../components/common/@';
+import { BarHeader } from '../components/util/@';
 import { OTPAction, OTPHeader } from '../components/screen/@';
 import { BgIcon } from '../components/util/@';
 import { AuthService, PhoneService } from '../services/@';
@@ -38,7 +38,11 @@ export default function () {
 				skipL={true}
 				skipR={true}
 			/>
-			<OTPHeader alt="OTP Create" image={BgImage} label="" />
+			<OTPHeader
+				alt="OTP Create"
+				image={BgImage}
+				label="To proceed, please log in with your phone number."
+			/>
 			<OTPAction
 				actionButton={generate}
 				actionUpdate={setPhone}

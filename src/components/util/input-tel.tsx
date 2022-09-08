@@ -14,7 +14,7 @@ export default function (props: {
 			className="child-input:bg-gray-400 child-input:bg-opacity-20 child-input:px-4 child-input:py-2 child-input:rounded-md "
 			defaultCountry="PL"
 			placeholder={props.placeholder}
-			onChange={props.onChange}
+			onChange={(value) => props.onChange(value || '')}
 			value={props.value}
 		/>
 	);

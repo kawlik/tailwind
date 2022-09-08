@@ -1,4 +1,6 @@
 export { default as AvatarIcon } from './avatar-icon';
+export { default as BarFooter } from './bar-footer';
+export { default as BarHeader } from './bar-header';
 export { default as BgIcon } from './bg-icon';
 export { default as BgImage } from './bg-image';
 export { default as BgLabel } from './bg-label';

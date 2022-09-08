@@ -2,7 +2,7 @@ import { doc, DocumentReference, DocumentSnapshot } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { BillInfoType } from '../types/@';
 import { FirebaseService, FirestoreService } from './@';
-import { FirestoreDocument } from './common/@';
+import { FirestoreDocument } from './utils/@';
 
 // define service
 class BillInfoService<T> extends FirestoreDocument<T> {
