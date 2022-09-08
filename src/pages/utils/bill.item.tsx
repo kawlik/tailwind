@@ -1,6 +1,6 @@
 import { FaDollarSign } from 'react-icons/fa';
 import { useContexts } from '../../contexts/@';
-import { StampIcon } from '../util/@';
+import { StampIcon } from '../../components/@';
 
 export default function (props: {
 	order: number;

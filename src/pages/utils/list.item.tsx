@@ -1,5 +1,5 @@
 import { FaStar } from 'react-icons/fa';
-import { AvatarIcon } from '../util/@';
+import { AvatarIcon } from '../../components/@';
 
 export default function (props: {
 	action(): void;

@@ -1,4 +1,4 @@
-import { BgLabel } from '../components/util/@';
+import { BgLabel } from '../components/@';
 
 export default function () {
 	// component logic

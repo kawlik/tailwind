@@ -1,4 +1,4 @@
-import { BtnLabel } from '../util/@';
+import { BtnLabel } from '../../components/@';
 
 export default function (props: { action(): void; disabled: boolean }) {
 	// component logic

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { FaArrowLeft, FaArrowRight, FaLock, FaStarHalfAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { BarHeader } from '../components/util/@';
-import { OTPAction, OTPHeader } from '../components/screen/@';
-import { BgIcon } from '../components/util/@';
+import { BarHeader } from '../components/@';
+import { OTP_Action, OTP_Header } from './utils/@';
+import { BgIcon } from '../components/@';
 import { AuthService } from '../services/@';
 
 // assets
@@ -36,12 +36,12 @@ export default function () {
 				label="Verify OTP"
 				skipR={true}
 			/>
-			<OTPHeader
+			<OTP_Header
 				alt="OTP Verify"
 				image={BgImage}
 				label="Verify your login with a One Time Password."
 			/>
-			<OTPAction
+			<OTP_Action
 				actionButton={verify}
 				actionUpdate={setCode}
 				disabled={disabled}

@@ -4,7 +4,7 @@ import { FaPaperPlane, FaPlus } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { useContexts } from '../../contexts/@';
 import { PostService } from '../../services/@';
-import { BtnIcon, Input } from '../util/@';
+import { BtnIcon, Input } from '../../components/@';
 
 export default function () {
 	// component logic

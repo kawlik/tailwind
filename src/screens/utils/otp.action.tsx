@@ -1,6 +1,6 @@
 import { IconType } from 'react-icons/lib';
-import { InputOTP, InputTel } from '../util/@';
-import { OTPButton } from './@';
+import { InputOTP, InputTel } from '../../components/@';
+import { OTP_Button } from './@';
 
 export default function (props: {
 	actionButton(): void;
@@ -31,7 +31,7 @@ export default function (props: {
 					value={props.value}
 				/>
 			)}
-			<OTPButton
+			<OTP_Button
 				disabled={props.disabled}
 				icon={props.icon}
 				label={props.label}

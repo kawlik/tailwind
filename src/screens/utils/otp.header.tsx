@@ -1,4 +1,4 @@
-import { BgImage } from '../util/@';
+import { BgImage } from '../../components/@';
 
 export default function (props: { alt: string; image: string; label: string }) {
 	// component logic

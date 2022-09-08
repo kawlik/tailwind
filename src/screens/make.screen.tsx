@@ -2,8 +2,8 @@ import { Timestamp } from 'firebase/firestore';
 import { useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { BarHeader } from '../components/util/@';
-import { MakeStart, MakeTitle, MakeUser, MakeUsers } from '../components/screen/@';
+import { BarHeader } from '../components/@';
+import { Make_BillStart, Make_BillTitle, Make_ParticipantsJoin, Make_ParticipantsList } from './utils/@';
 import { useContexts } from '../contexts/@';
 import { BillListService } from '../services/@';
 
@@ -59,11 +59,11 @@ export default function () {
 				skipR={true}
 			/>
 			<section className="flex flex-1 flex-col gap-3 px-3 py-1 overflow-y-scroll">
-				<MakeTitle onChange={setTitle} value={title} />
-				<MakeUser onChange={setPhone} onUpdate={updateUsers} value={phone} />
-				<MakeUsers remove={removeUsers} usersList={users} />
+				<Make_BillTitle onChange={setTitle} value={title} />
+				<Make_ParticipantsJoin onChange={setPhone} onUpdate={updateUsers} value={phone} />
+				<Make_ParticipantsList remove={removeUsers} usersList={users} />
 			</section>
-			<MakeStart action={createBill} disabled={isInvalidData} />
+			<Make_BillStart action={createBill} disabled={isInvalidData} />
 		</>
 	);
 }

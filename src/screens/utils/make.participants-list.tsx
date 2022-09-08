@@ -1,6 +1,6 @@
 import { FaMinus } from 'react-icons/fa';
 import { useContexts } from '../../contexts/@';
-import { BtnIcon } from '../util/@';
+import { BtnIcon } from '../../components/@';
 
 export default function (props: { remove(user: string): void; usersList: string[] }) {
 	// component logic

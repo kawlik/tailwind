@@ -1,6 +1,6 @@
 import { FaList, FaUserPlus } from 'react-icons/fa';
 import { PhoneService } from '../../services/@';
-import { BtnIcon, InputTel } from '../util/@';
+import { BtnIcon, InputTel } from '../../components/@';
 
 export default function (props: {
 	onChange(value: string): void;

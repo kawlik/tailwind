@@ -1,4 +1,4 @@
-import { Input } from '../util/@';
+import { Input } from '../../components/@';
 
 export default function (props: { onChange(value: string): void; value: string }) {
 	// component logic

@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import { BtnIcon, Collapse } from '../util/@';
+import { BtnIcon, Collapse } from './@';
 
 export default function (props: {
 	actionL?(): void;
