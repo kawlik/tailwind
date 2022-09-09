@@ -1,4 +1,10 @@
-import { doc, DocumentReference, DocumentSnapshot } from 'firebase/firestore';
+import {
+	addDoc,
+	collection,
+	doc,
+	DocumentReference,
+	DocumentSnapshot,
+} from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { BillInfoType } from '../types/@';
 import { FirebaseService, FirestoreService } from './@';

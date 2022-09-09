@@ -1,3 +1,6 @@
+import { collection } from 'firebase/firestore';
+import { FirebaseService } from './@';
+
 // define service
 class FirestoreService {
 	constructor(private billData = 'bill-data', private listInfo = 'bill-info') {}
@@ -8,6 +11,14 @@ class FirestoreService {
 
 	get BillInfo() {
 		return this.listInfo;
+	}
+
+	get collectionBillData() {
+		return collection(FirebaseService.Firestore, this.BillData);
+	}
+
+	get collectionBillInfo() {
+		return collection(FirebaseService.Firestore, this.BillInfo);
 	}
 }
 

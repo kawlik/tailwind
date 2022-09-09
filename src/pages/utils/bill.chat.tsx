@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FaPaperPlane, FaPlus } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { useContexts } from '../../contexts/@';
-import { PostService } from '../../services/@';
+import { AlertService, BillPostService } from '../../services/@';
 import { BtnIcon, Input } from '../../components/@';
 
 export default function () {
@@ -18,13 +18,13 @@ export default function () {
 	const send = () => {
 		setPost('');
 
-		PostService.post(contexts.bill.get()?.id || pathname['billID'] || '', {
+		BillPostService.post(contexts.bill.get()?.id || pathname['billID'] || '', {
 			payload: post,
 			timestamp: Timestamp.now(),
 			type: 'text',
-			user: contexts.user.get()?.uid || '',
-		}).catch((err: unknown) => {
-			alert('Your post was not published for unknown reasons.\nPlease try again later.');
+			user: contexts.user.get()?.phoneNumber!,
+		}).catch(() => {
+			AlertService.promptError().then(() => setPost(post));
 		});
 	};
 

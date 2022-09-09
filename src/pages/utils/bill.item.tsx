@@ -13,7 +13,7 @@ export default function (props: {
 	const contexts = useContexts();
 
 	// dataset
-	const isMine = props.user === contexts.user.get()?.uid;
+	const isMine = props.user === contexts.user.get()?.phoneNumber;
 
 	// component layout
 	return (

@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { FaArrowLeft, FaArrowRight, FaLock, FaStarHalfAlt } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight, FaStarHalfAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { BarHeader } from '../components/@';
 import { OTP_Action, OTP_Header } from './utils/@';
-import { BgIcon } from '../components/@';
 import { AuthService } from '../services/@';
 
 // assets
@@ -51,7 +50,6 @@ export default function () {
 				title="Your OTP code"
 				value={code}
 			/>
-			<BgIcon icon={FaLock} />
 		</>
 	);
 }

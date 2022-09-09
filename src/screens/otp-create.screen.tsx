@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { FaArrowLeft, FaArrowRight, FaLock, FaShieldAlt } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight, FaShieldAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { BarHeader } from '../components/@';
 import { OTP_Action, OTP_Header } from './utils/@';
-import { BgIcon } from '../components/@';
-import { AuthService, PhoneService } from '../services/@';
+import { AlertService, AuthService, PhoneService } from '../services/@';
 
 // assets
 import BgImage from '../assets/otp-create.png';
@@ -23,8 +22,8 @@ export default function () {
 	const generate = () => {
 		AuthService.createOTP(phone)
 			.then(() => navigate('/otp-verify/'))
-			.catch((err: unknown) => {
-				alert('Your attempt has failed for unknown reasons.\nPlease try again later.');
+			.catch(() => {
+				AlertService.promptError();
 			});
 	};
 
@@ -53,7 +52,6 @@ export default function () {
 				title="Your phone number"
 				value={phone}
 			/>
-			<BgIcon icon={FaLock} />
 		</>
 	);
 }

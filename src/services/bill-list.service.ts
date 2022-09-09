@@ -2,13 +2,13 @@ import {
 	addDoc,
 	collection,
 	doc,
-	limit,
-	orderBy,
 	Query,
 	query,
 	QuerySnapshot,
+	runTransaction,
 	setDoc,
 	where,
+	writeBatch,
 } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { BillInfoType } from '../types/@';
@@ -37,22 +37,22 @@ class BillListService<T> extends FirestoreQuery<T> {
 		this.subject$.next(payload as T);
 	};
 
-	sort = (a: BillInfoType, b: BillInfoType): number => {
-		return a.timestampUpdated.seconds > b.timestampUpdated.seconds ? -1 : 1;
+	create = async (billInfo: BillInfoType): Promise<string> => {
+		const batch = writeBatch(FirebaseService.Firestore);
+
+		const billInfoRef = doc(FirestoreService.collectionBillInfo);
+		const billDataRef = doc(FirestoreService.collectionBillData, billInfoRef.id);
+
+		batch.set(billInfoRef, billInfo);
+		batch.set(billDataRef, { posts: [] });
+
+		await batch.commit();
+
+		return billDataRef.id;
 	};
 
-	updateList = async (billInfo: BillInfoType): Promise<string> => {
-		const billInfoDoc = await addDoc(
-			collection(FirebaseService.Firestore, FirestoreService.BillInfo),
-			billInfo,
-		);
-
-		const billDataDoc = await setDoc(
-			doc(FirebaseService.Firestore, FirestoreService.BillData, billInfoDoc.id),
-			{ posts: [] },
-		);
-
-		return billInfoDoc.id;
+	sort = (a: BillInfoType, b: BillInfoType): number => {
+		return a.timestampUpdated.seconds > b.timestampUpdated.seconds ? -1 : 1;
 	};
 }
 
