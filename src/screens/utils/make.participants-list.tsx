@@ -5,9 +5,7 @@ import { BtnIcon } from '../../components/@';
 export default function (props: { remove(user: string): void; usersList: string[] }) {
 	// component logic
 	const contexts = useContexts();
-
-	// dataset
-	const disabled = contexts.user.get()?.phoneNumber;
+	const disabled = (user: string) => user.slice(0, 12) === contexts.user.get()?.phoneNumber;
 
 	// component layout
 	return (
@@ -15,7 +13,7 @@ export default function (props: { remove(user: string): void; usersList: string[
 			{props.usersList.map((user) => (
 				<li className="flex flex-nowrap items-center gap-2" key={user}>
 					<BtnIcon
-						disabled={user === disabled}
+						disabled={disabled(user)}
 						icon={FaMinus}
 						onClick={() => props.remove(user)}
 					/>

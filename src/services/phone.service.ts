@@ -20,8 +20,16 @@ class PhoneService {
 			?.select(['name', 'tel'], { multiple: false })
 			.then((list) => list[0])
 			.then((user) => ({
-				name: user.name || '',
-				tel: user.tel || '',
+				name: user.name,
+				tel: user.tel,
+			}))
+			.then((user) => ({
+				name: user.name[0],
+				tel: user.tel[0],
+			}))
+			.then((user) => ({
+				name: user.name,
+				tel: this.parseToPhoneNumber(user.tel),
 			}));
 
 		return contact || Promise.reject();

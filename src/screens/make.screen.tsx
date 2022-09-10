@@ -28,6 +28,10 @@ export default function () {
 	// actions
 	const goBack = () => navigate(-1);
 
+	const slectUser = (user: string) => {
+		setUsers([...new Set([...users, user])].slice(0, 6));
+	};
+
 	const updateUsers = () => {
 		setUsers([...new Set([...users, phone])].slice(0, 6));
 		setPhone('');
@@ -70,6 +74,7 @@ export default function () {
 				<Make_BillTitle onChange={setTitle} value={title} />
 				<Make_ParticipantsJoin
 					onChange={setPhone}
+					onSelect={slectUser}
 					onUpdate={updateUsers}
 					value={phone}
 				/>

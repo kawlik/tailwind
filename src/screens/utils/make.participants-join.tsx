@@ -4,6 +4,7 @@ import { BtnIcon, InputTel } from '../../components/@';
 
 export default function (props: {
 	onChange(value: string): void;
+	onSelect(value: string): void;
 	onUpdate(): void;
 	value: string;
 }) {
@@ -16,12 +17,9 @@ export default function (props: {
 			AlertService.promptError();
 		});
 
-		if (!user) return;
+		if (!user) return AlertService.promptError();
 
-		if (PhoneService.isValidPhoneNumber(user.tel)) {
-			props.onChange(user.tel + !!user.name ? ` (${user.name})` : '');
-			props.onUpdate();
-		}
+		props.onSelect(`${user.tel}${!!user.name ? `( ${user.name})` : ''}`);
 	};
 
 	// component layout
