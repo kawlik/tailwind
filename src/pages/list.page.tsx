@@ -17,6 +17,7 @@ export default function () {
 
 	// create state
 	const [list, setList] = useState<BillInfoType[]>([]);
+	const [only, setOnly] = useState('');
 
 	// update state
 	useEffect(() => {
@@ -29,12 +30,14 @@ export default function () {
 
 	// actions
 	const openBill = (bill: BillInfoType) => () => navigate(`/bill/${bill.id}/`);
+	const includes = (bill: BillInfoType) =>
+		bill.title.toUpperCase().includes(only.toLocaleUpperCase());
 
 	// component layout
 	return (
 		<section className="flex flex-1 flex-col gap-3 overflow-y-scroll px-3 py-1">
-			<Input onChange={() => {}} placeholder="Search" type="text" value="" />
-			{list.map((item) => (
+			<Input onChange={setOnly} placeholder="Search" type="text" value={only} />
+			{list.filter(includes).map((item) => (
 				<List_Item
 					action={openBill(item)}
 					id={item.id!}

@@ -40,15 +40,15 @@ class BillListService<T> extends FirestoreQuery<T> {
 	create = async (billInfo: BillInfoType): Promise<string> => {
 		const batch = writeBatch(FirebaseService.Firestore);
 
-		const billInfoRef = doc(FirestoreService.collectionBillInfo);
-		const billDataRef = doc(FirestoreService.collectionBillData, billInfoRef.id);
+		const billDataRef = doc(FirestoreService.collectionBillData);
+		const billInfoRef = doc(FirestoreService.collectionBillInfo, billDataRef.id);
 
 		batch.set(billInfoRef, billInfo);
 		batch.set(billDataRef, { posts: [] });
 
 		await batch.commit();
 
-		return billDataRef.id;
+		return billInfoRef.id;
 	};
 
 	sort = (a: BillInfoType, b: BillInfoType): number => {

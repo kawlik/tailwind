@@ -36,7 +36,7 @@ export default function () {
 			</div>
 			<div className="flex flex-nowrap gap-2">
 				<BtnIcon disabled={!post} icon={FaPaperPlane} onClick={send} />
-				<BtnIcon disabled={false} icon={FaPlus} />
+				<BtnIcon disabled={true} icon={FaPlus} />
 			</div>
 		</aside>
 	);

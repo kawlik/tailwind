@@ -18,6 +18,7 @@ export default function (props: {
 	// component layout
 	return (
 		<section className="flex flex-1 flex-col gap-3 justify-between p-3 sticky">
+			<div id="recaptcha-refrence" />
 			<div className="bottom-0 flex flex-col gap-3 justify-center">
 				{props.inputType === 'tel' && (
 					<InputTel

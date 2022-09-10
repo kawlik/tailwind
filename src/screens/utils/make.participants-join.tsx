@@ -1,5 +1,5 @@
 import { FaList, FaUserPlus } from 'react-icons/fa';
-import { PhoneService } from '../../services/@';
+import { AlertService, PhoneService } from '../../services/@';
 import { BtnIcon, InputTel } from '../../components/@';
 
 export default function (props: {
@@ -9,6 +9,20 @@ export default function (props: {
 }) {
 	// component logic
 	const invalidPhoneNumber = !PhoneService.isValidPhoneNumber(props.value);
+
+	// actions
+	const tryUpdate = async () => {
+		const user = await PhoneService.getContact().catch(() => {
+			AlertService.promptError();
+		});
+
+		if (!user) return;
+
+		if (PhoneService.isValidPhoneNumber(user.tel)) {
+			props.onChange(user.tel + !!user.name ? ` (${user.name})` : '');
+			props.onUpdate();
+		}
+	};
 
 	// component layout
 	return (
@@ -26,7 +40,11 @@ export default function (props: {
 					icon={FaUserPlus}
 					onClick={props.onUpdate}
 				/>
-				<BtnIcon disabled={true} icon={FaList} />
+				<BtnIcon
+					disabled={!PhoneService.isSupported}
+					icon={FaList}
+					onClick={tryUpdate}
+				/>
 			</div>
 		</div>
 	);
