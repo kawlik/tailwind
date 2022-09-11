@@ -19,7 +19,7 @@ export default function (props: {
 
 		if (!user) return AlertService.promptError();
 
-		props.onSelect(`${user.tel}${!!user.name ? `( ${user.name})` : ''}`);
+		props.onSelect(user.tel);
 	};
 
 	// component layout

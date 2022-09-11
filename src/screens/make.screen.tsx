@@ -20,7 +20,7 @@ export default function () {
 	// create state
 	const [phone, setPhone] = useState('');
 	const [title, setTitle] = useState('');
-	const [users, setUsers] = useState([contexts.user.get()?.phoneNumber! + ' (You)']);
+	const [users, setUsers] = useState([contexts.user.get()?.phoneNumber!]);
 
 	// dataset
 	const canStartBilll = !!title.length && !!users.length;
@@ -46,7 +46,7 @@ export default function () {
 		setUsers([]);
 
 		const billID = await BillListService.create({
-			participants: users.map((user) => user.slice(0, 12)),
+			participants: users,
 			timestampCreated: Timestamp.now(),
 			timestampUpdated: Timestamp.now(),
 			title: title,

@@ -15,22 +15,21 @@ class PhoneService {
 		return this.supported;
 	}
 
-	getContact = async (): Promise<{ name: string; tel: string }> => {
+	getContact = async (): Promise<{ tel: string }> => {
 		const contact = await this.navigator.contacts
-			?.select(['name', 'tel'], { multiple: false })
+			?.select(['tel'], { multiple: false })
 			.then((list) => list[0])
 			.then((user) => ({
-				name: user.name,
-				tel: user.tel,
+				tel: user.tel || [],
 			}))
 			.then((user) => ({
-				name: user.name[0],
-				tel: user.tel[0],
+				tel: user.tel[0] || '',
 			}))
 			.then((user) => ({
-				name: user.name,
 				tel: this.parseToPhoneNumber(user.tel),
 			}));
+
+		if (!this.isValidPhoneNumber(contact?.tel || '')) return Promise.reject();
 
 		return contact || Promise.reject();
 	};

@@ -5,7 +5,7 @@ import { BtnIcon } from '../../components/@';
 export default function (props: { remove(user: string): void; usersList: string[] }) {
 	// component logic
 	const contexts = useContexts();
-	const disabled = (user: string) => user.slice(0, 12) === contexts.user.get()?.phoneNumber;
+	const disabled = (user: string) => user === contexts.user.get()?.phoneNumber;
 
 	// component layout
 	return (

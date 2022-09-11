@@ -1,13 +1,12 @@
 export default interface Contacts {
 	contacts?: {
 		select(
-			props: ['name', 'tel'],
+			props: ['tel'],
 			opts: {
 				multiple: boolean;
 			},
 		): Promise<
 			{
-				name: string[];
 				tel: string[];
 			}[]
 		>;

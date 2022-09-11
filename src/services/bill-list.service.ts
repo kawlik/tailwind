@@ -43,8 +43,8 @@ class BillListService<T> extends FirestoreQuery<T> {
 		const billDataRef = doc(FirestoreService.collectionBillData);
 		const billInfoRef = doc(FirestoreService.collectionBillInfo, billDataRef.id);
 
-		batch.set(billInfoRef, billInfo);
 		batch.set(billDataRef, { posts: [] });
+		batch.set(billInfoRef, billInfo);
 
 		await batch.commit();
 

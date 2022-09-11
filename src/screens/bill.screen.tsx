@@ -11,8 +11,6 @@ export default function () {
 	const navigate = useNavigate();
 	const pathname = useParams();
 
-	console.log(pathname);
-
 	// update context
 	useEffect(() => {
 		BillInfoService.subscribeOn(pathname['billID']!).subscribe((bill) =>

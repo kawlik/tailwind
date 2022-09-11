@@ -43,7 +43,7 @@ export default function () {
 					id={item.id!}
 					key={item.id}
 					participants={item.participants}
-					timestamp={item.timestampCreated.toDate().toLocaleDateString()}
+					timestamp={item.timestampUpdated.toDate().toLocaleDateString()}
 					title={item.title}
 				/>
 			))}
