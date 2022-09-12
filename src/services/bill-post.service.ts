@@ -8,7 +8,7 @@ class BillPostService {
 		return doc(FirestoreService.collectionBillData, document);
 	};
 
-    private getInfoRef = (document: string) => {
+	private getInfoRef = (document: string) => {
 		return doc(FirestoreService.collectionBillInfo, document);
 	};
 
@@ -18,7 +18,7 @@ class BillPostService {
 		};
 	};
 
-    private updateInfo = () => {
+	private updateInfo = () => {
 		return {
 			timestampClosed: null,
 			timestampUpdated: Timestamp.now(),
@@ -26,7 +26,7 @@ class BillPostService {
 	};
 
 	async post(document: string, payload: BIllPostType) {
-        const batch = writeBatch(FirebaseService.Firestore);
+		const batch = writeBatch(FirebaseService.Firestore);
 
 		batch.update(this.getDataRef(document), this.updateData(payload));
 		batch.update(this.getInfoRef(document), this.updateInfo());

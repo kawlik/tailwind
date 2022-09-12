@@ -17,9 +17,7 @@ export default function (props: {
 			AlertService.promptError();
 		});
 
-		if (!user) return AlertService.promptError();
-
-		props.onSelect(user.tel);
+		if (!!user?.tel) props.onSelect(user.tel);
 	};
 
 	// component layout

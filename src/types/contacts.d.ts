@@ -7,7 +7,7 @@ export default interface Contacts {
 			},
 		): Promise<
 			{
-				tel: string[];
+				tel?: string[];
 			}[]
 		>;
 	};

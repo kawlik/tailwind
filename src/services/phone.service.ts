@@ -15,27 +15,30 @@ class PhoneService {
 		return this.supported;
 	}
 
-	getContact = async (): Promise<{ tel: string }> => {
+	getContact = async () => {
 		const contact = await this.navigator.contacts
 			?.select(['tel'], { multiple: false })
 			.then((list) => list[0])
 			.then((user) => ({
-				tel: user.tel || [],
+				tel: user?.tel || [''],
 			}))
 			.then((user) => ({
-				tel: user.tel[0] || '',
+				tel: user.tel[0],
 			}))
 			.then((user) => ({
 				tel: this.parseToPhoneNumber(user.tel),
 			}));
 
-		if (!this.isValidPhoneNumber(contact?.tel || '')) return Promise.reject();
-
-		return contact || Promise.reject();
+		return this.isValidPhoneNumber(contact?.tel || '') ? contact : Promise.reject();
 	};
 
-	isValidPhoneNumber = isValidPhoneNumber;
-	parseToPhoneNumber = formatPhoneNumberIntl;
+	isValidPhoneNumber = (phone: string) => isValidPhoneNumber(phone, 'PL');
+	parseToPhoneNumber = (phone: string) => {
+		phone = phone.replaceAll(' ', '');
+		phone = phone.slice(phone.length - 9);
+
+		return '+48' + phone;
+	};
 }
 
 // export service
